@@ -3,6 +3,7 @@
     package="io.quarter.client">
 
     <application
+        android:name="io.quarter.client.QuarterApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
