@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    kotlin("android.extensions")
     kotlin("kapt")
 }
 
@@ -13,6 +14,9 @@ android {
         versionCode = Versions.appVersionCode
         versionName = Versions.appVersionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    androidExtensions {
+        isExperimental = true
     }
     buildTypes {
         getByName("release") {

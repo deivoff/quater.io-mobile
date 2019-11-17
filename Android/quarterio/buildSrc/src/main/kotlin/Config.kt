@@ -15,7 +15,7 @@ object Versions {
     const val appVersionName = "0.0.1"
 
     const val kotlin = "1.3.50"
-    const val androidPlugin = "3.6.0-beta01"
+    const val androidPlugin = "4.0.0-alpha03"
 
     const val rxRelay = "2.1.0"
     const val rxBinding = "3.0.0-alpha2"
