@@ -5,6 +5,7 @@ object ApplicationID {
 
 object Modules {
     const val app = ":app"
+    const val core = ":core"
 }
 
 object Versions {
@@ -37,6 +38,8 @@ object Versions {
 
 object Deps {
     val vers = Versions
+
+    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
 
     const val appcompat = "androidx.appcompat:appcompat:1.1.0"
     const val androidxCore = "androidx.core:core-ktx:1.1.0"

@@ -1,2 +1,6 @@
-include(Modules.app)
-rootProject.name="quarter.io"
+rootProject.name = "quarter.io"
+
+include(
+    Modules.app,
+    Modules.core
+)
