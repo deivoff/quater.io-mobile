@@ -7,6 +7,7 @@ object Modules {
     const val app = ":app"
     const val core = ":core"
     const val coreui = ":coreui"
+    const val data = ":data"
 }
 
 object Versions {
@@ -23,6 +24,8 @@ object Versions {
     const val rxBinding = "3.0.0-alpha2"
     const val rxKotlin = "2.2.0"
     const val rxAndroid = "2.0.2"
+
+    const val okhttp = "4.2.2"
 
     const val leakCanary = "2.0-alpha-2"
 
@@ -86,6 +89,12 @@ object Deps {
         const val core = "com.squareup.retrofit2:retrofit:${vers.retrofit}"
         const val moshi = "com.squareup.retrofit2:converter-moshi:${vers.retrofit}"
         const val rxjava = "com.squareup.retrofit2:adapter-rxjava2:${vers.retrofit}"
+    }
+
+    val okhttp = OkHttp
+
+    object OkHttp {
+        const val core = "com.squareup.okhttp3:okhttp:${vers.okhttp}"
     }
 
     val rxBinding = RxBinding
