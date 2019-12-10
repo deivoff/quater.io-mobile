@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
@@ -8,7 +8,6 @@ plugins {
 android {
     compileSdkVersion(Versions.compileSdk)
     defaultConfig {
-        applicationId = ApplicationID.default
         minSdkVersion(Versions.minSdk)
         targetSdkVersion(Versions.targetSdk)
         versionCode = Versions.appVersionCode
@@ -17,15 +16,6 @@ android {
     }
     androidExtensions {
         isExperimental = true
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -42,28 +32,19 @@ kapt {
 
 dependencies {
     arrayOf(
-        Modules.core,
-        Modules.coreui
-    ).forEach { dependency ->
-        implementation(project(dependency))
-    }
-
-    arrayOf(
         Deps.kotlin,
-        Deps.moshi.core,
-        Deps.retrofit.core,
-        Deps.retrofit.moshi,
-        Deps.retrofit.rxjava,
-        Deps.timber,
-        Deps.dagger.core
+        Deps.timber
     ).forEach { dependency ->
         implementation(dependency)
     }
 
     arrayOf(
-        Deps.moshi.codegen,
-        Deps.dagger.compiler
+        Deps.material,
+        Deps.androidxCore,
+        Deps.appcompat,
+        Deps.constraint,
+        Deps.recyclerView
     ).forEach { dependency ->
-        kapt(dependency)
+        api(dependency)
     }
 }

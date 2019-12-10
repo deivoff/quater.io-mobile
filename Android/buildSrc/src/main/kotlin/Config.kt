@@ -6,6 +6,7 @@ object ApplicationID {
 object Modules {
     const val app = ":app"
     const val core = ":core"
+    const val coreui = ":coreui"
 }
 
 object Versions {
