@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("com.apollographql.android")
 }
 
 android {
@@ -35,10 +36,8 @@ dependencies {
         Deps.kotlin,
         Deps.timber,
         Deps.moshi.core,
-        Deps.retrofit.core,
-        Deps.retrofit.moshi,
-        Deps.retrofit.rxjava,
-        Deps.dagger.core
+        Deps.dagger.core,
+        Deps.apollo.core
     ).forEach { dependency ->
         implementation(dependency)
     }

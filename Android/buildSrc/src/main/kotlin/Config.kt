@@ -20,24 +20,22 @@ object Versions {
     const val kotlin = "1.3.50"
     const val androidPlugin = "3.6.0-beta05"
 
-    const val rxRelay = "2.1.0"
-    const val rxBinding = "3.0.0-alpha2"
-    const val rxKotlin = "2.2.0"
-    const val rxAndroid = "2.0.2"
+    const val rxRelay = "2.1.1"
+    const val rxKotlin = "2.4.0"
+    const val rxAndroid = "2.1.1"
 
     const val okhttp = "4.2.2"
+    const val apollo = "1.2.2"
+    const val moshi = "1.9.1"
 
-    const val leakCanary = "2.0-alpha-2"
+    const val leakCanary = "2.0"
 
     const val klock = "1.4.0"
     const val dagger = "2.25.2"
-    const val moshi = "1.9.1"
-    const val retrofit = "2.4.0"
     const val timber = "4.7.1"
     const val junit = "4.12"
     const val testRunner = "1.1.0"
     const val espresso = "3.1.0"
-    const val googleServices = "4.3.1"
 }
 
 object Deps {
@@ -47,11 +45,9 @@ object Deps {
 
     const val appcompat = "androidx.appcompat:appcompat:1.1.0"
     const val androidxCore = "androidx.core:core-ktx:1.1.0"
-    const val recyclerView = "androidx.recyclerview:recyclerview:1.1.0-rc01"
-    const val material = "com.google.android.material:material:1.2.0-alpha01"
+    const val recyclerView = "androidx.recyclerview:recyclerview:1.1.0"
+    const val material = "com.google.android.material:material:1.2.0-alpha02"
     const val constraint = "androidx.constraintlayout:constraintlayout:1.1.3"
-
-    const val multidex = "com.android.support:multidex:1.0.3"
 
     val dagger = Dagger
 
@@ -83,36 +79,17 @@ object Deps {
         const val codegen = "com.squareup.moshi:moshi-kotlin-codegen:${vers.moshi}"
     }
 
-    val retrofit = Retrofit
-
-    object Retrofit {
-        const val core = "com.squareup.retrofit2:retrofit:${vers.retrofit}"
-        const val moshi = "com.squareup.retrofit2:converter-moshi:${vers.retrofit}"
-        const val rxjava = "com.squareup.retrofit2:adapter-rxjava2:${vers.retrofit}"
-    }
-
     val okhttp = OkHttp
 
     object OkHttp {
         const val core = "com.squareup.okhttp3:okhttp:${vers.okhttp}"
     }
 
-    val rxBinding = RxBinding
+    val apollo = Apollo
 
-    object RxBinding {
-        const val core = "com.jakewharton.rxbinding3:rxbinding-core:${vers.rxBinding}"
-        const val appCompat = "com.jakewharton.rxbinding3:rxbinding-appcompat:${vers.rxBinding}"
-        const val leanBack = "com.jakewharton.rxbinding3:rxbinding-leanback:${vers.rxBinding}"
-        const val recycler = "com.jakewharton.rxbinding3:rxbinding-recyclerview:${vers.rxBinding}"
-        const val viewPager = "com.jakewharton.rxbinding3:rxbinding-viewpager:${vers.rxBinding}"
-        const val material = "com.jakewharton.rxbinding3:rxbinding-material:${vers.rxBinding}"
-    }
-
-    val firebase = Firebase
-
-    object Firebase {
-        const val core = "com.google.firebase:firebase-core:17.1.0"
-        const val crashlytics = "com.crashlytics.sdk.android:crashlytics:2.10.1"
+    object Apollo {
+        const val plugin = "com.apollographql.apollo:apollo-gradle-plugin:${vers.apollo}"
+        const val core = "com.apollographql.apollo:apollo-gradle-plugin:${vers.apollo}"
     }
 
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
