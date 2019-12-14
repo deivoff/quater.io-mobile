@@ -1,6 +1,7 @@
 package io.quarter.client
 
 import android.app.Application
+import io.quarter.client.BuildConfig
 import timber.log.Timber
 
 /*

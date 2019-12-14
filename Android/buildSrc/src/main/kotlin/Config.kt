@@ -17,7 +17,7 @@ object Versions {
     const val appVersionCode = 1000
     const val appVersionName = "0.0.1"
 
-    const val kotlin = "1.3.50"
+    const val kotlin = "1.3.60"
     const val androidPlugin = "3.6.0-beta05"
 
     const val rxRelay = "2.1.1"
@@ -27,6 +27,8 @@ object Versions {
     const val okhttp = "4.2.2"
     const val apollo = "1.2.2"
     const val moshi = "1.9.1"
+
+    const val ribs = "0.9.0"
 
     const val leakCanary = "2.0"
 
@@ -55,6 +57,8 @@ object Deps {
         const val core = "com.google.dagger:dagger:${vers.dagger}"
         const val compiler = "com.google.dagger:dagger-compiler:${vers.dagger}"
     }
+
+    val ribs = "com.github.badoo.RIBs:rib-android:${vers.ribs}"
 
     val rx = Rx
 

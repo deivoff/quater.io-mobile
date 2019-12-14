@@ -33,7 +33,9 @@ kapt {
 dependencies {
     arrayOf(
         Deps.kotlin,
-        Deps.timber
+        Deps.timber,
+        Deps.rx.kotlin,
+        Deps.rx.relay
     ).forEach { dependency ->
         implementation(dependency)
     }
