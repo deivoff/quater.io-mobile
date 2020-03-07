@@ -1,8 +1,8 @@
 package io.quarter.client.util
 
 import android.annotation.SuppressLint
-import androidx.annotation.ColorRes
 import com.jakewharton.rxrelay2.BehaviorRelay
+import dev.steelahhh.coreui.ColorDesc
 import dev.steelahhh.coreui.WindowInsetsHolder
 import io.quarter.client.R
 import io.reactivex.Observable
@@ -29,9 +29,9 @@ object StatusBarController {
 
     fun observe(): Observable<Configuration> = configurationRelay.hide()
 
-    fun newColor(@ColorRes colorRes: Int) = configurationRelay.accept(
-        configuration?.copy(colorRes = colorRes) ?: Configuration(
-            colorRes = colorRes
+    fun newColor(colorDesc: ColorDesc) = configurationRelay.accept(
+        configuration?.copy(colorDesc = colorDesc) ?: Configuration(
+            colorDesc = colorDesc
         )
     )
 
@@ -45,7 +45,7 @@ object StatusBarController {
 
     data class Configuration(
         val height: Int = 0,
-        @ColorRes val colorRes: Int = R.color.white,
+        val colorDesc: ColorDesc = ColorDesc.Resource(R.color.white),
         val visible: Boolean = true
     )
 }

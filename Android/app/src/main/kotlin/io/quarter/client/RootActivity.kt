@@ -2,19 +2,15 @@ package io.quarter.client
 
 import android.os.Bundle
 import android.view.ViewGroup
-import com.badoo.ribs.android.RibActivity
-import com.badoo.ribs.core.Node
+import androidx.appcompat.app.AppCompatActivity
 import io.quarter.client.util.StatusBarController
 import io.quarter.client.util.TranslucentInsetsFrameLayout
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 
-class RootActivity : RibActivity() {
-    override val rootViewGroup: ViewGroup
-        get() = findViewById(R.id.root)
-
-    override fun createRib(savedInstanceState: Bundle?): Node<*> = TODO()
+class RootActivity : AppCompatActivity() {
+    private val rootViewGroup: ViewGroup get() = findViewById(R.id.root)
 
     private val cd = CompositeDisposable()
 
@@ -29,7 +25,7 @@ class RootActivity : RibActivity() {
             .subscribeBy { config ->
                 (rootViewGroup as TranslucentInsetsFrameLayout).updateStatusBar(
                     config.height,
-                    config.colorRes,
+                    config.colorDesc,
                     config.visible
                 )
             }

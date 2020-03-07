@@ -51,8 +51,9 @@ dependencies {
     arrayOf(
         Deps.kotlin,
         Deps.timber,
-        Deps.ribs,
         Deps.rx.kotlin,
+        Deps.rx.relay,
+        Deps.rx.android,
         Deps.dagger.core
     ).forEach { dependency ->
         implementation(dependency)

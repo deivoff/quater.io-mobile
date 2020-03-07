@@ -11,9 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.widget.FrameLayout
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
+import androidx.annotation.ColorInt
 import androidx.core.view.updatePadding
+import dev.steelahhh.coreui.ColorDesc
 import dev.steelahhh.coreui.WindowInsetsHolder
 import dev.steelahhh.coreui.extensions.darkenColor
 import io.quarter.client.R
@@ -30,19 +30,20 @@ class TranslucentInsetsFrameLayout @JvmOverloads constructor(
 
     fun updateStatusBar(
         height: Int,
-        @ColorRes colorRes: Int,
+        color: ColorDesc,
         visible: Boolean
     ) {
-        val color = darkenColor(ContextCompat.getColor(context, colorRes), 0.08f)
+        val darkenedColor = darkenColor(color.create(context), 0.08f)
         statusBarHeight = height
-        statusBarPaint.color = color
+        statusBarPaint.color = darkenedColor
         drawStatusBar = visible
         if (visible) {
-            statusBarPaint.color = color
+            statusBarPaint.color = darkenedColor
         } else {
             statusBarPaint.color = Color.parseColor("#14000000") // 8% of black
         }
         updatePadding(top = if (drawStatusBar) statusBarHeight else 0)
+        invalidate()
     }
 
     override fun dispatchDraw(canvas: Canvas) {
