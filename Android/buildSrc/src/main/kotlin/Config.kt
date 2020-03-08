@@ -17,8 +17,12 @@ object Versions {
     const val appVersionCode = 1000
     const val appVersionName = "0.0.1"
 
-    const val kotlin = "1.3.70"
-    const val androidPlugin = "4.0.0-beta01"
+    const val kotlin = "1.3.61"
+    const val androidPlugin = "4.1.0-alpha01"
+
+    const val compose = "0.1.0-dev05"
+
+    const val composeRouter = "0.5.2"
 
     const val rxRelay = "2.1.1"
     const val rxKotlin = "2.4.0"
@@ -49,12 +53,18 @@ object Deps {
     const val material = "com.google.android.material:material:1.2.0-alpha02"
     const val constraint = "androidx.constraintlayout:constraintlayout:1.1.3"
 
-    val dagger = Dagger
+    val compose = Compose
 
-    object Dagger {
-        const val core = "com.google.dagger:dagger:${vers.dagger}"
-        const val compiler = "com.google.dagger:dagger-compiler:${vers.dagger}"
+    object Compose {
+        const val atext = "androidx.ui:ui-platform:${vers.compose}"
+        const val framework = "androidx.ui:ui-framework:${vers.compose}"
+        const val layout = "androidx.ui:ui-layout:${vers.compose}"
+        const val material = "androidx.ui:ui-material:${vers.compose}"
+        const val tooling = "androidx.ui:ui-tooling:${vers.compose}"
+        const val icons = "androidx.ui:ui-material-icons-extended:${vers.compose}"
     }
+
+    const val router = "com.github.zsoltk:compose-router:${vers.composeRouter}"
 
     val rx = Rx
 

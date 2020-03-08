@@ -34,15 +34,8 @@ dependencies {
     arrayOf(
         Deps.kotlin,
         Deps.material,
-        Deps.timber,
-        Deps.dagger.core
+        Deps.timber
     ).forEach { dependency ->
         implementation(dependency)
-    }
-
-    arrayOf(
-        Deps.dagger.compiler
-    ).forEach { dependency ->
-        kapt(dependency)
     }
 }

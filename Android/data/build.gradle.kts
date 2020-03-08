@@ -36,7 +36,6 @@ dependencies {
         Deps.kotlin,
         Deps.timber,
         Deps.moshi.core,
-        Deps.dagger.core,
         Deps.apollo.core
     ).forEach { dependency ->
         implementation(dependency)
@@ -46,11 +45,5 @@ dependencies {
         Deps.okhttp.core
     ).forEach { dependency ->
         api(dependency)
-    }
-
-    arrayOf(
-        Deps.dagger.compiler
-    ).forEach { dependency ->
-        kapt(dependency)
     }
 }

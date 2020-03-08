@@ -7,16 +7,13 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.os.Build
 import android.util.AttributeSet
-import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.widget.FrameLayout
-import androidx.annotation.ColorInt
 import androidx.core.view.updatePadding
 import dev.steelahhh.coreui.ColorDesc
 import dev.steelahhh.coreui.WindowInsetsHolder
 import dev.steelahhh.coreui.extensions.darkenColor
-import io.quarter.client.R
 
 class TranslucentInsetsFrameLayout @JvmOverloads constructor(
     context: Context,
@@ -66,8 +63,9 @@ class TranslucentInsetsFrameLayout @JvmOverloads constructor(
             val child = getChildAt(0)
             val ignoredHeight = when (child) {
                 is ViewGroup -> {
-                    val navigation = child.findViewById<View>(R.id.rootNavigation)
-                    navigation?.height ?: 0
+                    0
+                    // val navigation = child.findViewById<View>(R.id.rootNavigation)
+                    // navigation?.height ?: 0
                 }
                 else -> 0
             }
