@@ -20,7 +20,7 @@ fun PrimaryButton(
     modifier: Modifier = LayoutTag("primaryButton$text"),
     shape: Shape = RoundedCornerShape(8.dp),
     isEnabled: Boolean = true,
-    onClick: () -> Unit = {}
+    onClick: (() -> Unit)? = {}
 ) = Button(
     elevation = 6.dp,
     modifier = LayoutWidth.Fill + LayoutHeight.Min(48.dp) + modifier,

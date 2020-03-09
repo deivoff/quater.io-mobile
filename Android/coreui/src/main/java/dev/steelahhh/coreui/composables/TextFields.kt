@@ -15,6 +15,7 @@ import androidx.ui.layout.Column
 import androidx.ui.layout.LayoutHeight
 import androidx.ui.layout.LayoutPadding
 import androidx.ui.layout.LayoutWidth
+import androidx.ui.layout.Row
 import androidx.ui.layout.Stack
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.surface.Surface
@@ -26,35 +27,51 @@ import androidx.ui.unit.sp
 fun TextInput(
     hint: String,
     value: String,
+    error: String? = null,
     identifier: String? = null,
     onImeAction: (ImeAction) -> Unit = {},
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Next,
     onValueChange: (value: String) -> Unit
 ) {
-    Surface(
-        modifier = LayoutPadding(bottom = 24.dp),
-        shape = RoundedCornerShape(8.dp),
-        border = Border(1.dp, Color.Black)
-    ) {
-        Column(
-            modifier = LayoutHeight.Min(48.dp) + LayoutPadding(12.dp),
-            arrangement = Arrangement.Center
+    Column(modifier = LayoutPadding(bottom = 24.dp)) {
+        Surface(
+            shape = RoundedCornerShape(8.dp),
+            border = Border(
+                size = 1.dp,
+                color = MaterialTheme.colors().primary.takeIf {
+                    error == null
+                } ?: MaterialTheme.colors().error
+            )
         ) {
-            Stack(modifier = LayoutWidth.Fill) {
-                if (value.isEmpty())
-                    Text(
-                        text = hint,
-                        style = TextStyle(MaterialTheme.colors().secondary.copy(alpha = 0.6f))
+            Column(
+                modifier = LayoutHeight.Min(48.dp) + LayoutPadding(12.dp),
+                arrangement = Arrangement.Center
+            ) {
+                Stack(modifier = LayoutWidth.Fill) {
+                    if (value.isEmpty())
+                        Text(
+                            text = hint,
+                            style = TextStyle(MaterialTheme.colors().secondary.copy(alpha = 0.6f))
+                        )
+                    TextField(
+                        keyboardType = keyboardType,
+                        textStyle = TextStyle(color = Color.Black, fontSize = 16.sp),
+                        value = value,
+                        onImeActionPerformed = onImeAction,
+                        imeAction = imeAction,
+                        onValueChange = onValueChange,
+                        focusIdentifier = identifier
                     )
-                TextField(
-                    keyboardType = keyboardType,
-                    textStyle = TextStyle(color = Color.Black, fontSize = 16.sp),
-                    value = value,
-                    onImeActionPerformed = onImeAction,
-                    imeAction = imeAction,
-                    onValueChange = onValueChange,
-                    focusIdentifier = identifier
+                }
+            }
+        }
+        if (error != null) {
+            Row(modifier = LayoutPadding(top = 4.dp, left = 8.dp)) {
+                Text(
+                    text = error, style = MaterialTheme.typography().caption.copy(
+                        color = MaterialTheme.colors().error
+                    )
                 )
             }
         }
