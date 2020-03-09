@@ -4,6 +4,7 @@ import androidx.compose.Composable
 import com.github.zsoltk.compose.router.Router
 import io.quarter.client.loggedout.login.Login
 import io.quarter.client.loggedout.register.Register
+import io.quarter.client.loggedout.register.RegisterViewModel
 
 interface LoggedOut {
 
@@ -15,7 +16,10 @@ interface LoggedOut {
 
     companion object {
         @Composable
-        fun Content(defaultRouting: Routing) {
+        fun Content(
+            defaultRouting: Routing,
+            registerViewModel: RegisterViewModel
+        ) {
             Router(defaultRouting) { backStack ->
                 when (val currentRouting = backStack.last()) {
                     is Routing.Splash -> Splash.Content(
@@ -35,6 +39,7 @@ interface LoggedOut {
                         onLoginClick = currentRouting.onAuthorized
                     )
                     is Routing.Register -> Register.Content(
+                        viewModel = registerViewModel,
                         onBackClick = { backStack.pop() },
                         onLoginClick = {
                             backStack.pop()

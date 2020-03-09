@@ -63,6 +63,8 @@ dependencies {
         Deps.rx.kotlin,
         Deps.rx.relay,
         Deps.rx.android,
+        Deps.koin.android,
+        Deps.koin.viewModel,
         Deps.router,
         Deps.compose.framework,
         Deps.compose.atext,

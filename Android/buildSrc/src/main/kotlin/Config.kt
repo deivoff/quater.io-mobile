@@ -24,6 +24,8 @@ object Versions {
 
     const val composeRouter = "0.5.2"
 
+    const val koin = "2.1.3"
+
     const val rxRelay = "2.1.1"
     const val rxKotlin = "2.4.0"
     const val rxAndroid = "2.1.1"
@@ -62,6 +64,13 @@ object Deps {
         const val material = "androidx.ui:ui-material:${vers.compose}"
         const val tooling = "androidx.ui:ui-tooling:${vers.compose}"
         const val icons = "androidx.ui:ui-material-icons-extended:${vers.compose}"
+    }
+
+    val koin = Koin
+
+    object Koin {
+        const val android = "org.koin:koin-android:${vers.koin}"
+        const val viewModel = "org.koin:koin-android-viewmodel:${vers.koin}"
     }
 
     const val router = "com.github.zsoltk:compose-router:${vers.composeRouter}"

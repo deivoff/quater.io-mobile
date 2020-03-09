@@ -9,10 +9,14 @@ import com.github.zsoltk.compose.backpress.AmbientBackPressHandler
 import com.github.zsoltk.compose.backpress.BackPressHandler
 import com.github.zsoltk.compose.savedinstancestate.BundleScope
 import com.github.zsoltk.compose.savedinstancestate.saveAmbient
+import io.quarter.client.loggedout.register.RegisterViewModel
 import io.quarter.client.root.Root
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class RootActivity : AppCompatActivity() {
     private val backPressHandler = BackPressHandler()
+
+    private val registerViewModel: RegisterViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +24,9 @@ class RootActivity : AppCompatActivity() {
             MaterialTheme(colors) {
                 Providers(AmbientBackPressHandler provides backPressHandler) {
                     BundleScope(savedInstanceState) {
-                        Root.Content()
+                        Root.Content(
+                            registerViewModel = registerViewModel
+                        )
                     }
                 }
             }
