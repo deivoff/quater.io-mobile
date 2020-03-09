@@ -2,9 +2,9 @@ package io.quarter.client.util
 
 import android.annotation.SuppressLint
 import com.jakewharton.rxrelay2.BehaviorRelay
-import dev.steelahhh.coreui.ColorDesc
-import dev.steelahhh.coreui.WindowInsetsHolder
 import io.quarter.client.R
+import io.quarter.coreui.ColorDesc
+import io.quarter.coreui.WindowInsetsHolder
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.subscribeBy
 

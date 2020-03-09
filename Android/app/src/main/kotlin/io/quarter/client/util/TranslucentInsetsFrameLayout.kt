@@ -11,9 +11,9 @@ import android.view.ViewGroup
 import android.view.WindowInsets
 import android.widget.FrameLayout
 import androidx.core.view.updatePadding
-import dev.steelahhh.coreui.ColorDesc
-import dev.steelahhh.coreui.WindowInsetsHolder
-import dev.steelahhh.coreui.extensions.darkenColor
+import io.quarter.coreui.ColorDesc
+import io.quarter.coreui.WindowInsetsHolder
+import io.quarter.coreui.extensions.darkenColor
 
 class TranslucentInsetsFrameLayout @JvmOverloads constructor(
     context: Context,

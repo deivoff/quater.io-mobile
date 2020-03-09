@@ -17,23 +17,21 @@ import androidx.ui.layout.LayoutPadding
 import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
 import androidx.ui.layout.Spacer
-import androidx.ui.material.CircularProgressIndicator
 import androidx.ui.material.TopAppBar
 import androidx.ui.text.AnnotatedString
 import androidx.ui.text.SpanStyle
 import androidx.ui.text.TextStyle
 import androidx.ui.text.style.TextDecoration
 import androidx.ui.unit.dp
-import dev.steelahhh.coreui.composables.AppBarVector
-import dev.steelahhh.coreui.composables.LoaderButton
-import dev.steelahhh.coreui.composables.PasswordTextInput
-import dev.steelahhh.coreui.composables.PrimaryButton
-import dev.steelahhh.coreui.composables.TextInput
-import dev.steelahhh.coreui.extensions.hideKeyboard
-import dev.steelahhh.coreui.extensions.modify
-import dev.steelahhh.coreui.observe
 import io.quarter.client.R
 import io.quarter.core.Strings
+import io.quarter.coreui.composables.AppBarVector
+import io.quarter.coreui.composables.LoaderButton
+import io.quarter.coreui.composables.PasswordTextInput
+import io.quarter.coreui.composables.TextInput
+import io.quarter.coreui.extensions.hideKeyboard
+import io.quarter.coreui.extensions.modify
+import io.quarter.coreui.observe
 
 interface Register {
     companion object {

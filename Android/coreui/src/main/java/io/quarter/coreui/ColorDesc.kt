@@ -1,9 +1,9 @@
-package dev.steelahhh.coreui
+package io.quarter.coreui
 
 import android.content.Context
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
-import dev.steelahhh.coreui.extensions.getColorCompat
+import io.quarter.coreui.extensions.getColorCompat
 
 /*
  * Author: steelahhh

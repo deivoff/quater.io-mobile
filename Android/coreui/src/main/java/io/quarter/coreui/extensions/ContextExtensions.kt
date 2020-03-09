@@ -1,4 +1,4 @@
-package dev.steelahhh.coreui.extensions
+package io.quarter.coreui.extensions
 
 import android.content.Context
 import android.graphics.drawable.Drawable

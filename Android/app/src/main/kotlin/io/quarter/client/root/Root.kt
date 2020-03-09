@@ -4,10 +4,10 @@ import android.app.Activity
 import androidx.compose.Composable
 import androidx.ui.core.ContextAmbient
 import com.github.zsoltk.compose.router.Router
-import dev.steelahhh.coreui.extensions.hideKeyboard
 import io.quarter.client.loggedin.LoggedIn
 import io.quarter.client.loggedout.LoggedOut
 import io.quarter.client.loggedout.register.RegisterViewModel
+import io.quarter.coreui.extensions.hideKeyboard
 
 interface Root {
     sealed class Routing {

@@ -1,4 +1,4 @@
-package dev.steelahhh.coreui
+package io.quarter.coreui
 
 import androidx.compose.Composable
 import androidx.compose.onCommit

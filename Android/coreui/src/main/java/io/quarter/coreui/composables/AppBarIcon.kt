@@ -1,4 +1,4 @@
-package dev.steelahhh.coreui.composables
+package io.quarter.coreui.composables
 
 import androidx.compose.Composable
 import androidx.ui.foundation.Box

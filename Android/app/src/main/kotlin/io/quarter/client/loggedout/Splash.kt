@@ -11,8 +11,8 @@ import androidx.ui.layout.Spacer
 import androidx.ui.material.MaterialTheme
 import androidx.ui.text.style.TextAlign
 import androidx.ui.unit.dp
-import dev.steelahhh.coreui.composables.PrimaryButton
 import io.quarter.core.Strings
+import io.quarter.coreui.composables.PrimaryButton
 
 /*
  * Author: steelahhh

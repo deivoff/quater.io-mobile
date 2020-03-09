@@ -1,4 +1,4 @@
-package dev.steelahhh.coreui
+package io.quarter.coreui
 
 import android.graphics.Rect
 import com.jakewharton.rxrelay2.BehaviorRelay

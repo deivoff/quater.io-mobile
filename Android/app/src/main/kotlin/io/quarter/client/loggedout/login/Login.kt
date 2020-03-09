@@ -25,14 +25,14 @@ import androidx.ui.text.font.FontWeight
 import androidx.ui.text.style.TextAlign
 import androidx.ui.text.style.TextDecoration
 import androidx.ui.unit.dp
-import dev.steelahhh.coreui.composables.AppBarVector
-import dev.steelahhh.coreui.composables.PasswordTextInput
-import dev.steelahhh.coreui.composables.PrimaryButton
-import dev.steelahhh.coreui.composables.TextInput
-import dev.steelahhh.coreui.extensions.hideKeyboard
-import dev.steelahhh.coreui.extensions.modify
 import io.quarter.client.R
 import io.quarter.core.Strings
+import io.quarter.coreui.composables.AppBarVector
+import io.quarter.coreui.composables.PasswordTextInput
+import io.quarter.coreui.composables.PrimaryButton
+import io.quarter.coreui.composables.TextInput
+import io.quarter.coreui.extensions.hideKeyboard
+import io.quarter.coreui.extensions.modify
 
 interface Login {
     companion object {
