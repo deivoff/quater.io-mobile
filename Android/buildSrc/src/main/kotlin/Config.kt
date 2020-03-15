@@ -24,14 +24,12 @@ object Versions {
 
     const val composeRouter = "0.5.2"
 
-    const val koin = "2.1.3"
-
     const val rxRelay = "2.1.1"
     const val rxKotlin = "2.4.0"
     const val rxAndroid = "2.1.1"
 
     const val okhttp = "4.2.2"
-    const val apollo = "1.2.2"
+    const val apollo = "1.3.3"
     const val moshi = "1.9.1"
 
     const val leakCanary = "2.0"
@@ -55,6 +53,12 @@ object Deps {
     const val material = "com.google.android.material:material:1.2.0-alpha02"
     const val constraint = "androidx.constraintlayout:constraintlayout:1.1.3"
 
+    val arch = Architecture
+
+    object Architecture {
+        const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    }
+
     val compose = Compose
 
     object Compose {
@@ -64,13 +68,6 @@ object Deps {
         const val material = "androidx.ui:ui-material:${vers.compose}"
         const val tooling = "androidx.ui:ui-tooling:${vers.compose}"
         const val icons = "androidx.ui:ui-material-icons-extended:${vers.compose}"
-    }
-
-    val koin = Koin
-
-    object Koin {
-        const val android = "org.koin:koin-android:${vers.koin}"
-        const val viewModel = "org.koin:koin-android-viewmodel:${vers.koin}"
     }
 
     const val router = "com.github.zsoltk:compose-router:${vers.composeRouter}"
@@ -104,11 +101,14 @@ object Deps {
         const val core = "com.squareup.okhttp3:okhttp:${vers.okhttp}"
     }
 
+    val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.4"
+
     val apollo = Apollo
 
     object Apollo {
         const val plugin = "com.apollographql.apollo:apollo-gradle-plugin:${vers.apollo}"
-        const val core = "com.apollographql.apollo:apollo-gradle-plugin:${vers.apollo}"
+        const val core = "com.apollographql.apollo:apollo-runtime:${vers.apollo}"
+        const val coroutines = "com.apollographql.apollo:apollo-coroutines-support:${vers.apollo}"
     }
 
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"

@@ -9,14 +9,13 @@ import com.github.zsoltk.compose.backpress.AmbientBackPressHandler
 import com.github.zsoltk.compose.backpress.BackPressHandler
 import com.github.zsoltk.compose.savedinstancestate.BundleScope
 import com.github.zsoltk.compose.savedinstancestate.saveAmbient
-import io.quarter.client.loggedout.register.RegisterViewModel
 import io.quarter.client.root.Root
-import org.koin.android.viewmodel.ext.android.viewModel
+import io.quarter.client.root.RootViewModel
 
 class RootActivity : AppCompatActivity() {
     private val backPressHandler = BackPressHandler()
 
-    private val registerViewModel: RegisterViewModel by viewModel()
+    private val rootViewModel = RootViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +24,10 @@ class RootActivity : AppCompatActivity() {
                 Providers(AmbientBackPressHandler provides backPressHandler) {
                     BundleScope(savedInstanceState) {
                         Root.Content(
-                            registerViewModel = registerViewModel
+                            defaultRouting = if (rootViewModel.isAuthorized)
+                                Root.Routing.LoggedIn
+                            else
+                                Root.Routing.LoggedOut
                         )
                     }
                 }

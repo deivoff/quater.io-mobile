@@ -22,9 +22,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    sourceSets {
-        getByName("main").java.srcDir("src/main/kotlin")
-    }
+}
+
+apollo {
+    generateKotlinModels.set(true)
 }
 
 kapt {
@@ -36,10 +37,15 @@ dependencies {
         Deps.kotlin,
         Deps.timber,
         Deps.moshi.core,
-        Deps.apollo.core
+        Deps.apollo.core,
+        Deps.apollo.coroutines,
+        Deps.coroutines
     ).forEach { dependency ->
         implementation(dependency)
     }
+
+    compileOnly("org.jetbrains:annotations:13.0")
+    testCompileOnly("org.jetbrains:annotations:13.0")
 
     arrayOf(
         Deps.okhttp.core

@@ -1,11 +1,7 @@
 package io.quarter.client
 
 import android.app.Application
-import io.quarter.client.loggedout.loggedOutModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.viewmodel.koin.viewModel
-import org.koin.core.context.startKoin
-import org.koin.java.KoinJavaComponent
+import io.quarter.data.DataModule
 import timber.log.Timber
 
 /*
@@ -19,14 +15,11 @@ class QuarterApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         setupTimber()
-        setupKoin()
+        setupDi()
     }
 
-    private fun setupKoin() {
-        startKoin {
-            androidContext(this@QuarterApplication)
-            modules(loggedOutModule)
-        }
+    private fun setupDi() {
+        DataModule.init(this)
     }
 
     private fun setupTimber() {

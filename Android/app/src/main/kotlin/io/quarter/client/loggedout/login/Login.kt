@@ -28,23 +28,30 @@ import androidx.ui.unit.dp
 import io.quarter.client.R
 import io.quarter.core.Strings
 import io.quarter.coreui.composables.AppBarVector
+import io.quarter.coreui.composables.LoaderButton
 import io.quarter.coreui.composables.PasswordTextInput
-import io.quarter.coreui.composables.PrimaryButton
 import io.quarter.coreui.composables.TextInput
 import io.quarter.coreui.extensions.hideKeyboard
 import io.quarter.coreui.extensions.modify
+import io.quarter.coreui.observe
+import io.quarter.data.authorization.AuthorizationInput
 
 interface Login {
     companion object {
         @Composable
         fun Content(
+            viewModel: LoginViewModel = LoginViewModel(),
             onBackClick: () -> Unit,
             onRegisterClick: () -> Unit,
-            onLoginClick: () -> Unit = {}
+            onLoggedIn: () -> Unit
         ) {
             val focusManager = FocusManagerAmbient.current
             val context = ContextAmbient.current
-            val loginState = state { LoginViewState() }
+            val loginInput = state { AuthorizationInput() }
+
+            val loginState = observe(data = viewModel.loginViewState)
+
+            if (loginState?.isSuccessfullyLoggedIn == true) onLoggedIn()
 
             Column(
                 modifier = LayoutWidth.Fill + LayoutHeight.Fill
@@ -72,22 +79,22 @@ interface Login {
                     TextInput(
                         identifier = "LoginField",
                         hint = Strings.Authorization.name,
-                        value = loginState.value.login,
+                        value = loginInput.value.login,
                         onImeAction = { focusManager.requestFocusById("PasswordField") }
                     ) {
-                        loginState.modify { copy(login = it) }
+                        loginInput.modify { copy(login = it) }
                     }
                     Column(arrangement = Arrangement.End) {
                         PasswordTextInput(
                             identifier = "PasswordField",
                             hint = Strings.Authorization.password,
-                            value = loginState.value.password,
+                            value = loginInput.value.password,
                             onImeAction = { action ->
                                 if (action == ImeAction.Done) hideKeyboard(context as Activity)
                             },
                             layoutModifier = LayoutPadding(bottom = 4.dp)
                         ) {
-                            loginState.modify { copy(password = it) }
+                            loginInput.modify { copy(password = it) }
                         }
                         Clickable {
                             Text(
@@ -102,11 +109,24 @@ interface Login {
                         }
                         Spacer(modifier = LayoutHeight.Min(12.dp))
                     }
-                    PrimaryButton(
+                    LoaderButton(
                         text = Strings.Authorization.login,
-                        isEnabled = !loginState.value.isEmpty,
-                        onClick = onLoginClick
+                        isLoading = loginState?.isLoading == true,
+                        isEnabled = !loginInput.value.isEmpty,
+                        onClick = {
+                            viewModel.login(loginInput.value)
+                        }
                     )
+                    if (loginState?.isError == true) {
+                        Column(modifier = LayoutPadding(4.dp)) {
+                            Text(
+                                text = Strings.Authorization.loginError,
+                                style = MaterialTheme.typography().subtitle2.copy(
+                                    color = MaterialTheme.colors().error
+                                )
+                            )
+                        }
+                    }
                     Spacer(modifier = LayoutHeight.Min(8.dp))
                     Row(
                         modifier = LayoutWidth.Fill,

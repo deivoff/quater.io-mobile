@@ -7,6 +7,8 @@ package io.quarter.core
 
 object Strings {
     const val create = "Создать"
+    const val error = "Ошибка"
+    const val tryAgain = "Попробуйте еще раз."
 
     object Authorization {
         const val login = "Войти"
@@ -19,6 +21,8 @@ object Strings {
         const val password = "Пароль"
         const val name = "Логин"
         const val forgotPassword = "Забыли пароль?"
+
+        const val loginError = "Ошибка при авторизации"
     }
 
     object Register {
@@ -28,5 +32,8 @@ object Strings {
         const val patronymic = "Отчество"
 
         const val alreadyClient = "Вы наш клиент?"
+
+        const val registerError = "Ошибка при регистрации"
+        const val emailError = "Некорректный E-mail"
     }
 }

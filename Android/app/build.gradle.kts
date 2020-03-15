@@ -51,6 +51,7 @@ kapt {
 
 dependencies {
     arrayOf(
+        Modules.data,
         Modules.core,
         Modules.coreui
     ).forEach { dependency ->
@@ -63,8 +64,7 @@ dependencies {
         Deps.rx.kotlin,
         Deps.rx.relay,
         Deps.rx.android,
-        Deps.koin.android,
-        Deps.koin.viewModel,
+        Deps.arch.viewmodel,
         Deps.router,
         Deps.compose.framework,
         Deps.compose.atext,

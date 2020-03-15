@@ -3,6 +3,7 @@ package io.quarter.client.loggedout
 import androidx.compose.Composable
 import com.github.zsoltk.compose.router.Router
 import io.quarter.client.loggedout.login.Login
+import io.quarter.client.loggedout.login.LoginViewModel
 import io.quarter.client.loggedout.register.Register
 import io.quarter.client.loggedout.register.RegisterViewModel
 
@@ -18,7 +19,8 @@ interface LoggedOut {
         @Composable
         fun Content(
             defaultRouting: Routing,
-            registerViewModel: RegisterViewModel
+            registerViewModel: RegisterViewModel,
+            loginViewModel: LoginViewModel
         ) {
             Router(defaultRouting) { backStack ->
                 when (val currentRouting = backStack.last()) {
@@ -31,12 +33,13 @@ interface LoggedOut {
                         }
                     )
                     is Routing.Login -> Login.Content(
+                        viewModel = loginViewModel,
                         onBackClick = { backStack.pop() },
                         onRegisterClick = {
                             backStack.pop()
                             backStack.push(Routing.Register(currentRouting.onAuthorized))
                         },
-                        onLoginClick = currentRouting.onAuthorized
+                        onLoggedIn = currentRouting.onAuthorized
                     )
                     is Routing.Register -> Register.Content(
                         viewModel = registerViewModel,
@@ -44,7 +47,8 @@ interface LoggedOut {
                         onLoginClick = {
                             backStack.pop()
                             backStack.push(Routing.Login(currentRouting.onAuthorized))
-                        }
+                        },
+                        onLoggedIn = currentRouting.onAuthorized
                     )
                 }
             }

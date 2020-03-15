@@ -17,6 +17,7 @@ import androidx.ui.layout.LayoutPadding
 import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
 import androidx.ui.layout.Spacer
+import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
 import androidx.ui.text.AnnotatedString
 import androidx.ui.text.SpanStyle
@@ -32,6 +33,7 @@ import io.quarter.coreui.composables.TextInput
 import io.quarter.coreui.extensions.hideKeyboard
 import io.quarter.coreui.extensions.modify
 import io.quarter.coreui.observe
+import io.quarter.data.register.RegisterInput
 
 interface Register {
     companion object {
@@ -39,16 +41,19 @@ interface Register {
         fun Content(
             viewModel: RegisterViewModel,
             onBackClick: () -> Unit,
-            onLoginClick: () -> Unit
+            onLoginClick: () -> Unit,
+            onLoggedIn: () -> Unit
         ) {
-            val isLoading = observe(viewModel.registerProgress)
+            val registerViewState = observe(viewModel.registerViewState)
+
+            if (registerViewState?.isRegisterSuccess == true) onLoggedIn()
 
             Column(
                 modifier = LayoutWidth.Fill + LayoutHeight.Fill
             ) {
                 val focusManager = FocusManagerAmbient.current
                 val context = ContextAmbient.current
-                val registerState = state { RegisterViewState() }
+                val registerInput = state { RegisterInput() }
 
                 TopAppBar(
                     title = { Text(text = Strings.Authorization.registerTitle) },
@@ -63,52 +68,68 @@ interface Register {
                         TextInput(
                             identifier = "EmailId",
                             hint = Strings.Register.email,
-                            value = registerState.value.email,
+                            value = registerInput.value.email,
+                            error = Strings.Register.emailError.takeIf {
+                                registerViewState?.isEmailInvalid == true
+                            },
                             onImeAction = { focusManager.requestFocusById("PasswordId") }
                         ) {
-                            registerState.modify { copy(email = it) }
+                            registerInput.modify { copy(email = it) }
                         }
                         PasswordTextInput(
                             identifier = "PasswordId",
                             hint = Strings.Authorization.password,
-                            value = registerState.value.password,
+                            value = registerInput.value.password,
                             onImeAction = { focusManager.requestFocusById("LastNameId") }
                         ) {
-                            registerState.modify { copy(password = it) }
+                            registerInput.modify { copy(password = it) }
                         }
                         TextInput(
                             identifier = "LastNameId",
                             hint = Strings.Register.lastName,
-                            value = registerState.value.lastName,
+                            value = registerInput.value.lastName,
                             onImeAction = { focusManager.requestFocusById("FirstNameId") }
                         ) {
-                            registerState.modify { copy(lastName = it) }
+                            registerInput.modify { copy(lastName = it) }
                         }
                         TextInput(
                             identifier = "FirstNameId",
                             hint = Strings.Register.firstName,
-                            value = registerState.value.firstName,
+                            value = registerInput.value.firstName,
                             onImeAction = { focusManager.requestFocusById("PatronymicId") }
                         ) {
-                            registerState.modify { copy(firstName = it) }
+                            registerInput.modify { copy(firstName = it) }
                         }
                         TextInput(
                             identifier = "PatronymicId",
                             hint = Strings.Register.patronymic,
-                            value = registerState.value.patronymic,
+                            value = registerInput.value.patronymic,
                             imeAction = ImeAction.Done,
                             onImeAction = { action ->
                                 if (action == ImeAction.Done) hideKeyboard(context as Activity)
                             }
                         ) {
-                            registerState.modify { copy(patronymic = it) }
+                            registerInput.modify { copy(patronymic = it) }
                         }
                         LoaderButton(
                             text = Strings.Authorization.register,
-                            isLoading = isLoading == true,
-                            isEnabled = !registerState.value.isEmpty(),
-                            onClick = { viewModel.register(registerState.value) }
+                            isLoading = registerViewState?.isLoading == true,
+                            isEnabled = !registerInput.value.isEmpty(),
+                            onClick = {
+                                hideKeyboard(context as Activity)
+                                viewModel.register(registerInput.value)
+                            }
                         )
+                        if (registerViewState?.isError == true) {
+                            Column(modifier = LayoutPadding(4.dp)) {
+                                Text(
+                                    text = Strings.Register.registerError,
+                                    style = MaterialTheme.typography().subtitle2.copy(
+                                        color = MaterialTheme.colors().error
+                                    )
+                                )
+                            }
+                        }
                         Spacer(modifier = LayoutHeight.Min(8.dp))
                         Row(
                             modifier = LayoutWidth.Fill,

@@ -6,6 +6,7 @@ import androidx.ui.core.ContextAmbient
 import com.github.zsoltk.compose.router.Router
 import io.quarter.client.loggedin.LoggedIn
 import io.quarter.client.loggedout.LoggedOut
+import io.quarter.client.loggedout.login.LoginViewModel
 import io.quarter.client.loggedout.register.RegisterViewModel
 import io.quarter.coreui.extensions.hideKeyboard
 
@@ -18,20 +19,24 @@ interface Root {
     companion object {
         @Composable
         fun Content(
-            defaultRouting: Routing = Routing.LoggedOut,
-            registerViewModel: RegisterViewModel
+            defaultRouting: Routing = Routing.LoggedOut
         ) {
             val context = ContextAmbient.current
             Router(defaultRouting) { backStack ->
                 hideKeyboard(context as Activity)
-                when (val routing = backStack.last()) {
-                    Routing.LoggedOut -> LoggedOut.Content(
+                when (backStack.last()) {
+                    is Routing.LoggedOut -> LoggedOut.Content(
                         defaultRouting = LoggedOut.Routing.Splash(
                             onAuthorized = { backStack.newRoot(Routing.LoggedIn) }
                         ),
-                        registerViewModel = registerViewModel
+                        registerViewModel = RegisterViewModel(),
+                        loginViewModel = LoginViewModel()
                     )
-                    Routing.LoggedIn -> LoggedIn.Content()
+                    is Routing.LoggedIn -> LoggedIn.Content(
+                        loginViewModel = LoginViewModel()
+                    ) {
+                        backStack.newRoot(Routing.LoggedOut)
+                    }
                 }
             }
         }
