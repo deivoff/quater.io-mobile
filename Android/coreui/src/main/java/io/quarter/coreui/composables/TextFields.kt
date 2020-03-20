@@ -18,7 +18,7 @@ import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
 import androidx.ui.layout.Stack
 import androidx.ui.material.MaterialTheme
-import androidx.ui.material.surface.Surface
+import androidx.ui.material.Surface
 import androidx.ui.text.TextStyle
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
@@ -67,7 +67,7 @@ fun TextInput(
             }
         }
         if (error != null) {
-            Row(modifier = LayoutPadding(top = 4.dp, left = 8.dp)) {
+            Row(modifier = LayoutPadding(top = 4.dp, start = 8.dp)) {
                 Text(
                     text = error, style = MaterialTheme.typography().caption.copy(
                         color = MaterialTheme.colors().error

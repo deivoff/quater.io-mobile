@@ -35,7 +35,7 @@ interface LoggedIn {
                                 textAlign = TextAlign.Center
                             )
                         )
-                        Spacer(modifier = LayoutFlexible(1f))
+                        Spacer(modifier = LayoutWeight(1f))
                         PrimaryButton(
                             text = "Выйти",
                             onClick = {

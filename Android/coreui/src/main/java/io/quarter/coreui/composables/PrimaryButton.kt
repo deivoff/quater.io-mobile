@@ -26,7 +26,7 @@ fun PrimaryButton(
     modifier = LayoutWidth.Fill + LayoutHeight.Min(48.dp) + modifier,
     shape = shape,
     backgroundColor = MaterialTheme.colors().run { if (isEnabled) primary else secondary },
-    onClick = onClick.takeIf { isEnabled }
+    onClick = onClick.takeIf { isEnabled } ?: {}
 ) {
     Text(
         text = text,

@@ -7,6 +7,7 @@ import androidx.ui.core.ContextAmbient
 import androidx.ui.core.FocusManagerAmbient
 import androidx.ui.core.Text
 import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.Icon
 import androidx.ui.graphics.Color
 import androidx.ui.input.ImeAction
 import androidx.ui.layout.Arrangement
@@ -16,8 +17,11 @@ import androidx.ui.layout.LayoutPadding
 import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
 import androidx.ui.layout.Spacer
+import androidx.ui.material.IconButton
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
+import androidx.ui.material.icons.Icons
+import androidx.ui.material.icons.filled.ArrowBack
 import androidx.ui.text.AnnotatedString
 import androidx.ui.text.SpanStyle
 import androidx.ui.text.TextStyle
@@ -25,9 +29,7 @@ import androidx.ui.text.font.FontWeight
 import androidx.ui.text.style.TextAlign
 import androidx.ui.text.style.TextDecoration
 import androidx.ui.unit.dp
-import io.quarter.client.R
 import io.quarter.core.Strings
-import io.quarter.coreui.composables.AppBarVector
 import io.quarter.coreui.composables.LoaderButton
 import io.quarter.coreui.composables.PasswordTextInput
 import io.quarter.coreui.composables.TextInput
@@ -61,7 +63,9 @@ interface Login {
                     color = Color.White,
                     elevation = 4.dp,
                     navigationIcon = {
-                        AppBarVector(vectorRes = R.drawable.ic_arrow_back, onClick = onBackClick)
+                        IconButton(onClick = onBackClick) {
+                            Icon(icon = Icons.Default.ArrowBack)
+                        }
                     }
                 )
                 Column(
@@ -84,7 +88,7 @@ interface Login {
                     ) {
                         loginInput.modify { copy(login = it) }
                     }
-                    Column(arrangement = Arrangement.End) {
+                    Column(arrangement = Arrangement.Bottom) {
                         PasswordTextInput(
                             identifier = "PasswordField",
                             hint = Strings.Authorization.password,
@@ -96,7 +100,7 @@ interface Login {
                         ) {
                             loginInput.modify { copy(password = it) }
                         }
-                        Clickable {
+                        Clickable(onClick = {}) {
                             Text(
                                 modifier = LayoutWidth.Fill,
                                 text = Strings.Authorization.forgotPassword,

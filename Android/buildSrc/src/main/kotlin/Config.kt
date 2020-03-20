@@ -18,11 +18,11 @@ object Versions {
     const val appVersionName = "0.0.1"
 
     const val kotlin = "1.3.61"
-    const val androidPlugin = "4.1.0-alpha01"
+    const val androidPlugin = "4.1.0-alpha03"
 
-    const val compose = "0.1.0-dev05"
+    const val compose = "0.1.0-dev07"
 
-    const val composeRouter = "0.5.2"
+    const val composeRouter = "0.7.0"
 
     const val rxRelay = "2.1.1"
     const val rxKotlin = "2.4.0"

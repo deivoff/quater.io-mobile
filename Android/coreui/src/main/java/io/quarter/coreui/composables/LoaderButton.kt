@@ -10,9 +10,9 @@ import androidx.ui.layout.Column
 import androidx.ui.layout.LayoutHeight
 import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
-import androidx.ui.layout.Stack
 import androidx.ui.material.CircularProgressIndicator
 import androidx.ui.material.MaterialTheme
+import androidx.ui.material.Surface
 import androidx.ui.unit.dp
 
 /*
@@ -29,34 +29,36 @@ fun LoaderButton(
     isEnabled: Boolean = true,
     onClick: () -> Unit = {}
 ) {
-    Stack(
+    Column(
         modifier = LayoutHeight.Min(48.dp) + LayoutHeight.Max(48.dp)
     ) {
-        PrimaryButton(
-            text = text.takeIf { !isLoading } ?: "",
-            modifier = modifier,
-            shape = shape,
-            isEnabled = isEnabled,
-            onClick = onClick.takeIf { !isLoading }
-        )
-
         if (isLoading) {
-            Row(
-                modifier = LayoutWidth.Fill + LayoutHeight.Fill,
-                arrangement = Arrangement.Center
-            ) {
-                Column(
-                    modifier = LayoutWidth.Min(40.dp) + LayoutHeight.Min(48.dp),
+            Surface(shape = shape, color = MaterialTheme.colors().primary) {
+                Row(
+                    modifier = LayoutWidth.Fill + LayoutHeight.Fill,
                     arrangement = Arrangement.Center
                 ) {
-                    Row(
-                        modifier = LayoutWidth.Max(40.dp) + LayoutHeight.Max(40.dp),
+                    Column(
+                        modifier = LayoutWidth.Min(40.dp) + LayoutHeight.Min(48.dp),
                         arrangement = Arrangement.Center
                     ) {
-                        CircularProgressIndicator(color = MaterialTheme.colors().onPrimary)
+                        Row(
+                            modifier = LayoutWidth.Max(40.dp) + LayoutHeight.Max(40.dp),
+                            arrangement = Arrangement.Center
+                        ) {
+                            CircularProgressIndicator(color = MaterialTheme.colors().onPrimary)
+                        }
                     }
                 }
             }
+        } else {
+            PrimaryButton(
+                text = text.takeIf { !isLoading } ?: "",
+                modifier = modifier,
+                shape = shape,
+                isEnabled = isEnabled,
+                onClick = onClick.takeIf { !isLoading }
+            )
         }
     }
 }
