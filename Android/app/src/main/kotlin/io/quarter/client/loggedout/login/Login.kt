@@ -39,120 +39,120 @@ import io.quarter.coreui.observe
 import io.quarter.data.authorization.AuthorizationInput
 
 interface Login {
-    companion object {
-        @Composable
-        fun Content(
-            viewModel: LoginViewModel = LoginViewModel(),
-            onBackClick: () -> Unit,
-            onRegisterClick: () -> Unit,
-            onLoggedIn: () -> Unit
-        ) {
-            val focusManager = FocusManagerAmbient.current
-            val context = ContextAmbient.current
-            val loginInput = state { AuthorizationInput() }
+  companion object {
+    @Composable
+    fun Content(
+      viewModel: LoginViewModel = LoginViewModel(),
+      onBackClick: () -> Unit,
+      onRegisterClick: () -> Unit,
+      onLoggedIn: () -> Unit
+    ) {
+      val focusManager = FocusManagerAmbient.current
+      val context = ContextAmbient.current
+      val loginInput = state { AuthorizationInput() }
 
-            val loginState = observe(data = viewModel.loginViewState)
+      val loginState = observe(data = viewModel.loginViewState)
 
-            if (loginState?.isSuccessfullyLoggedIn == true) onLoggedIn()
+      if (loginState?.isSuccessfullyLoggedIn == true) onLoggedIn()
 
-            Column(
-                modifier = LayoutWidth.Fill + LayoutHeight.Fill
-            ) {
-                TopAppBar(
-                    title = { Text(text = Strings.Authorization.loginTitle) },
-                    color = Color.White,
-                    elevation = 4.dp,
-                    navigationIcon = {
-                        IconButton(onClick = onBackClick) {
-                            Icon(icon = Icons.Default.ArrowBack)
-                        }
-                    }
-                )
-                Column(
-                    modifier = LayoutWidth.Fill + LayoutHeight.Fill + LayoutPadding(16.dp),
-                    arrangement = Arrangement.Center
-                ) {
-                    Text(
-                        modifier = LayoutWidth.Fill,
-                        text = "quarter.io",
-                        style = MaterialTheme.typography().h2.copy(
-                            textAlign = TextAlign.Center
-                        )
-                    )
-                    Spacer(modifier = LayoutHeight.Min(48.dp))
-                    TextInput(
-                        identifier = "LoginField",
-                        hint = Strings.Authorization.name,
-                        value = loginInput.value.login,
-                        onImeAction = { focusManager.requestFocusById("PasswordField") }
-                    ) {
-                        loginInput.modify { copy(login = it) }
-                    }
-                    Column(arrangement = Arrangement.Bottom) {
-                        PasswordTextInput(
-                            identifier = "PasswordField",
-                            hint = Strings.Authorization.password,
-                            value = loginInput.value.password,
-                            onImeAction = { action ->
-                                if (action == ImeAction.Done) hideKeyboard(context as Activity)
-                            },
-                            layoutModifier = LayoutPadding(bottom = 4.dp)
-                        ) {
-                            loginInput.modify { copy(password = it) }
-                        }
-                        Clickable(onClick = {}) {
-                            Text(
-                                modifier = LayoutWidth.Fill,
-                                text = Strings.Authorization.forgotPassword,
-                                style = MaterialTheme.typography().subtitle2.copy(
-                                    fontWeight = FontWeight.Normal,
-                                    textAlign = TextAlign.End,
-                                    color = MaterialTheme.colors().secondary
-                                )
-                            )
-                        }
-                        Spacer(modifier = LayoutHeight.Min(12.dp))
-                    }
-                    LoaderButton(
-                        text = Strings.Authorization.login,
-                        isLoading = loginState?.isLoading == true,
-                        isEnabled = !loginInput.value.isEmpty,
-                        onClick = {
-                            viewModel.login(loginInput.value)
-                        }
-                    )
-                    if (loginState?.isError == true) {
-                        Column(modifier = LayoutPadding(4.dp)) {
-                            Text(
-                                text = Strings.Authorization.loginError,
-                                style = MaterialTheme.typography().subtitle2.copy(
-                                    color = MaterialTheme.colors().error
-                                )
-                            )
-                        }
-                    }
-                    Spacer(modifier = LayoutHeight.Min(8.dp))
-                    Row(
-                        modifier = LayoutWidth.Fill,
-                        arrangement = Arrangement.Center
-                    ) {
-                        Text(
-                            text = "${Strings.Authorization.noAccount} ",
-                            style = TextStyle(color = Color.Black.copy(alpha = 0.5f))
-                        )
-                        Clickable(onClick = onRegisterClick) {
-                            val createText = AnnotatedString(
-                                text = Strings.create,
-                                spanStyle = SpanStyle(
-                                    color = Color.Black,
-                                    textDecoration = TextDecoration.Underline
-                                )
-                            )
-                            Text(text = createText)
-                        }
-                    }
-                }
+      Column(
+        modifier = LayoutWidth.Fill + LayoutHeight.Fill
+      ) {
+        TopAppBar(
+          title = { Text(text = Strings.Authorization.loginTitle) },
+          color = Color.White,
+          elevation = 4.dp,
+          navigationIcon = {
+            IconButton(onClick = onBackClick) {
+              Icon(icon = Icons.Default.ArrowBack)
             }
+          }
+        )
+        Column(
+          modifier = LayoutWidth.Fill + LayoutHeight.Fill + LayoutPadding(16.dp),
+          arrangement = Arrangement.Center
+        ) {
+          Text(
+            modifier = LayoutWidth.Fill,
+            text = "quarter.io",
+            style = MaterialTheme.typography().h2.copy(
+              textAlign = TextAlign.Center
+            )
+          )
+          Spacer(modifier = LayoutHeight.Min(48.dp))
+          TextInput(
+            identifier = "LoginField",
+            hint = Strings.Authorization.name,
+            value = loginInput.value.login,
+            onImeAction = { focusManager.requestFocusById("PasswordField") }
+          ) {
+            loginInput.modify { copy(login = it) }
+          }
+          Column(arrangement = Arrangement.Bottom) {
+            PasswordTextInput(
+              identifier = "PasswordField",
+              hint = Strings.Authorization.password,
+              value = loginInput.value.password,
+              onImeAction = { action ->
+                if (action == ImeAction.Done) hideKeyboard(context as Activity)
+              },
+              layoutModifier = LayoutPadding(bottom = 4.dp)
+            ) {
+              loginInput.modify { copy(password = it) }
+            }
+            Clickable(onClick = {}) {
+              Text(
+                modifier = LayoutWidth.Fill,
+                text = Strings.Authorization.forgotPassword,
+                style = MaterialTheme.typography().subtitle2.copy(
+                  fontWeight = FontWeight.Normal,
+                  textAlign = TextAlign.End,
+                  color = MaterialTheme.colors().secondary
+                )
+              )
+            }
+            Spacer(modifier = LayoutHeight.Min(12.dp))
+          }
+          LoaderButton(
+            text = Strings.Authorization.login,
+            isLoading = loginState?.isLoading == true,
+            isEnabled = !loginInput.value.isEmpty,
+            onClick = {
+              viewModel.login(loginInput.value)
+            }
+          )
+          if (loginState?.isError == true) {
+            Column(modifier = LayoutPadding(4.dp)) {
+              Text(
+                text = Strings.Authorization.loginError,
+                style = MaterialTheme.typography().subtitle2.copy(
+                  color = MaterialTheme.colors().error
+                )
+              )
+            }
+          }
+          Spacer(modifier = LayoutHeight.Min(8.dp))
+          Row(
+            modifier = LayoutWidth.Fill,
+            arrangement = Arrangement.Center
+          ) {
+            Text(
+              text = "${Strings.Authorization.noAccount} ",
+              style = TextStyle(color = Color.Black.copy(alpha = 0.5f))
+            )
+            Clickable(onClick = onRegisterClick) {
+              val createText = AnnotatedString(
+                text = Strings.create,
+                spanStyle = SpanStyle(
+                  color = Color.Black,
+                  textDecoration = TextDecoration.Underline
+                )
+              )
+              Text(text = createText)
+            }
+          }
         }
+      }
     }
+  }
 }

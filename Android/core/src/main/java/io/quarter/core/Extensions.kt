@@ -8,6 +8,6 @@ import androidx.lifecycle.MutableLiveData
  */
 
 inline fun <T> MutableLiveData<T>.modify(async: Boolean = true, crossinline block: T.() -> T) {
-    if (async) postValue(block(value!!))
-    else value = block(value!!)
+  if (async) postValue(block(value!!))
+  else value = block(value!!)
 }

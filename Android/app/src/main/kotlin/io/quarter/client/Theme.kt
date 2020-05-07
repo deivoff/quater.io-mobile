@@ -9,8 +9,8 @@ import androidx.ui.material.lightColorPalette
  */
 
 val colors = lightColorPalette(
-    primary = Color.Black,
-    onPrimary = Color.White,
-    secondary = Color.DarkGray,
-    surface = Color.White
+  primary = Color.Black,
+  onPrimary = Color.White,
+  secondary = Color.DarkGray,
+  surface = Color.White
 )

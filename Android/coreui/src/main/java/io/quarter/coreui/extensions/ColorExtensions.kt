@@ -7,6 +7,6 @@ import androidx.core.graphics.ColorUtils
 
 @ColorInt
 fun darkenColor(
-    @ColorInt color: Int,
-    @FloatRange(from = 0.0, to = 1.0) degree: Float
+  @ColorInt color: Int,
+  @FloatRange(from = 0.0, to = 1.0) degree: Float
 ): Int = ColorUtils.blendARGB(color, Color.BLACK, degree)

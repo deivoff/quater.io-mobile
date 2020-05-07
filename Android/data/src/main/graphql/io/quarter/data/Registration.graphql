@@ -1,4 +1,3 @@
-
 mutation Register($user: UserInput!) {
     createUser(userInput: $user) {
         id

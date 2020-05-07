@@ -11,42 +11,42 @@ import io.quarter.data.authorization.AuthorizationRepository
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val authorizationRepository: AuthorizationRepository = DataModule.authRepo,
-    private val keyValueStorage: KeyValueStorage = DataModule.keyValueStorage
+  private val authorizationRepository: AuthorizationRepository = DataModule.authRepo,
+  private val keyValueStorage: KeyValueStorage = DataModule.keyValueStorage
 ) : ViewModel() {
 
-    val loginViewState: MutableLiveData<LoginViewState> = MutableLiveData()
+  val loginViewState: MutableLiveData<LoginViewState> = MutableLiveData()
 
-    init {
-        loginViewState.value = LoginViewState()
-    }
+  init {
+    loginViewState.value = LoginViewState()
+  }
 
-    fun login(authorizationInput: AuthorizationInput) {
-        loginViewState.modify { copy(isLoading = true, isError = false) }
+  fun login(authorizationInput: AuthorizationInput) {
+    loginViewState.modify { copy(isLoading = true, isError = false) }
 
-        viewModelScope.launch {
-            try {
-                val token = authorizationRepository.login(authorizationInput)
-                keyValueStorage.putString("token", token)
-                loginViewState.modify {
-                    copy(
-                        isLoading = false,
-                        isError = false,
-                        isSuccessfullyLoggedIn = true
-                    )
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                loginViewState.modify { copy(isLoading = false, isError = true) }
-            }
+    viewModelScope.launch {
+      try {
+        val token = authorizationRepository.login(authorizationInput)
+        keyValueStorage.putString("token", token)
+        loginViewState.modify {
+          copy(
+            isLoading = false,
+            isError = false,
+            isSuccessfullyLoggedIn = true
+          )
         }
+      } catch (e: Exception) {
+        e.printStackTrace()
+        loginViewState.modify { copy(isLoading = false, isError = true) }
+      }
     }
+  }
 
-    fun logout() = keyValueStorage.clear("token")
+  fun logout() = keyValueStorage.clear("token")
 
-    data class LoginViewState(
-        val isLoading: Boolean = false,
-        val isError: Boolean = false,
-        val isSuccessfullyLoggedIn: Boolean = false
-    )
+  data class LoginViewState(
+    val isLoading: Boolean = false,
+    val isError: Boolean = false,
+    val isSuccessfullyLoggedIn: Boolean = false
+  )
 }

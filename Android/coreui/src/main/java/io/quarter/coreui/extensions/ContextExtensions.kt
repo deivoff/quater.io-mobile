@@ -14,5 +14,5 @@ inline fun Context.getColorCompat(@ColorRes color: Int) = ContextCompat.getColor
 
 @Suppress("NOTHING_TO_INLINE")
 inline fun Context.getDrawableCompat(res: Int): Drawable? {
-    return ContextCompat.getDrawable(this, res)
+  return ContextCompat.getDrawable(this, res)
 }

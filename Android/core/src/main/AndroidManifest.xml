@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.quarter.core" />
+<manifest package="io.quarter.core" />

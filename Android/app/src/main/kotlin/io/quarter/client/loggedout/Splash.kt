@@ -20,29 +20,29 @@ import io.quarter.coreui.composables.PrimaryButton
  */
 
 interface Splash {
-    companion object {
-        @Composable
-        fun Content(
+  companion object {
+    @Composable
+    fun Content(
 
-            loginClick: () -> Unit,
-            registerClick: () -> Unit
-        ) {
-            Column(
-                modifier = LayoutPadding(16.dp),
-                arrangement = Arrangement.Center
-            ) {
-                Text(
-                    modifier = LayoutWidth.Fill,
-                    text = "quarter.io",
-                    style = MaterialTheme.typography().h2.copy(
-                        textAlign = TextAlign.Center
-                    )
-                )
-                Spacer(modifier = LayoutHeight.Min(92.dp))
-                PrimaryButton(text = Strings.Authorization.login, onClick = loginClick)
-                Spacer(modifier = LayoutHeight.Min(16.dp))
-                PrimaryButton(text = Strings.Authorization.register, onClick = registerClick)
-            }
-        }
+      loginClick: () -> Unit,
+      registerClick: () -> Unit
+    ) {
+      Column(
+        modifier = LayoutPadding(16.dp),
+        arrangement = Arrangement.Center
+      ) {
+        Text(
+          modifier = LayoutWidth.Fill,
+          text = "quarter.io",
+          style = MaterialTheme.typography().h2.copy(
+            textAlign = TextAlign.Center
+          )
+        )
+        Spacer(modifier = LayoutHeight.Min(92.dp))
+        PrimaryButton(text = Strings.Authorization.login, onClick = loginClick)
+        Spacer(modifier = LayoutHeight.Min(16.dp))
+        PrimaryButton(text = Strings.Authorization.register, onClick = registerClick)
+      }
     }
+  }
 }

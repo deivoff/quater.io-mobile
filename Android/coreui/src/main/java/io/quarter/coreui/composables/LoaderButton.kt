@@ -22,43 +22,43 @@ import androidx.ui.unit.dp
 
 @Composable
 fun LoaderButton(
-    text: String,
-    isLoading: Boolean = false,
-    modifier: Modifier = LayoutTag("loaderButton$text"),
-    shape: Shape = RoundedCornerShape(8.dp),
-    isEnabled: Boolean = true,
-    onClick: () -> Unit = {}
+  text: String,
+  isLoading: Boolean = false,
+  modifier: Modifier = LayoutTag("loaderButton$text"),
+  shape: Shape = RoundedCornerShape(8.dp),
+  isEnabled: Boolean = true,
+  onClick: () -> Unit = {}
 ) {
-    Column(
-        modifier = LayoutHeight.Min(48.dp) + LayoutHeight.Max(48.dp)
-    ) {
-        if (isLoading) {
-            Surface(shape = shape, color = MaterialTheme.colors().primary) {
-                Row(
-                    modifier = LayoutWidth.Fill + LayoutHeight.Fill,
-                    arrangement = Arrangement.Center
-                ) {
-                    Column(
-                        modifier = LayoutWidth.Min(40.dp) + LayoutHeight.Min(48.dp),
-                        arrangement = Arrangement.Center
-                    ) {
-                        Row(
-                            modifier = LayoutWidth.Max(40.dp) + LayoutHeight.Max(40.dp),
-                            arrangement = Arrangement.Center
-                        ) {
-                            CircularProgressIndicator(color = MaterialTheme.colors().onPrimary)
-                        }
-                    }
-                }
+  Column(
+    modifier = LayoutHeight.Min(48.dp) + LayoutHeight.Max(48.dp)
+  ) {
+    if (isLoading) {
+      Surface(shape = shape, color = MaterialTheme.colors().primary) {
+        Row(
+          modifier = LayoutWidth.Fill + LayoutHeight.Fill,
+          arrangement = Arrangement.Center
+        ) {
+          Column(
+            modifier = LayoutWidth.Min(40.dp) + LayoutHeight.Min(48.dp),
+            arrangement = Arrangement.Center
+          ) {
+            Row(
+              modifier = LayoutWidth.Max(40.dp) + LayoutHeight.Max(40.dp),
+              arrangement = Arrangement.Center
+            ) {
+              CircularProgressIndicator(color = MaterialTheme.colors().onPrimary)
             }
-        } else {
-            PrimaryButton(
-                text = text.takeIf { !isLoading } ?: "",
-                modifier = modifier,
-                shape = shape,
-                isEnabled = isEnabled,
-                onClick = onClick.takeIf { !isLoading }
-            )
+          }
         }
+      }
+    } else {
+      PrimaryButton(
+        text = text.takeIf { !isLoading } ?: "",
+        modifier = modifier,
+        shape = shape,
+        isEnabled = isEnabled,
+        onClick = onClick.takeIf { !isLoading }
+      )
     }
+  }
 }

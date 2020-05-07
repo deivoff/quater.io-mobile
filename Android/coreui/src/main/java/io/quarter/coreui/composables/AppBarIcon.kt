@@ -9,11 +9,11 @@ import androidx.ui.unit.dp
 
 @Composable
 fun AppBarVector(vectorRes: Int, onClick: () -> Unit) {
-    Ripple(radius = 20.dp, bounded = false) {
-        Clickable(onClick = onClick) {
-            Box(LayoutSize(48.dp)) {
-                // Vector(vectorImage = vectorResource(id = vectorRes), tintColor = Color.Black)
-            }
-        }
+  Ripple(radius = 20.dp, bounded = false) {
+    Clickable(onClick = onClick) {
+      Box(LayoutSize(48.dp)) {
+        // Vector(vectorImage = vectorResource(id = vectorRes), tintColor = Color.Black)
+      }
     }
+  }
 }

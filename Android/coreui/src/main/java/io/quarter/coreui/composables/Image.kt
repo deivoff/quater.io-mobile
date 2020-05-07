@@ -10,21 +10,21 @@ import androidx.ui.res.loadVectorResource
 
 @Composable
 fun LoadImage(imageResId: Int, tint: Color? = null) {
-    loadImageResource(imageResId).resource.resource?.let {
-        Image(image = it)
-        Image(
-            image = it,
-            colorFilter = tint?.let { ColorFilter(color = it, blendMode = BlendMode.color) }
-        )
-    }
+  loadImageResource(imageResId).resource.resource?.let {
+    Image(image = it)
+    Image(
+      image = it,
+      colorFilter = tint?.let { ColorFilter(color = it, blendMode = BlendMode.color) }
+    )
+  }
 }
 
 @Composable
 fun LoadVector(imageResId: Int, tint: Color? = null) {
-    loadVectorResource(imageResId).resource.resource?.let {
-        // DrawVector(
-        //     vectorImage = it,
-        //     tintColor = tint ?: Color.Black
-        // )
-    }
+  loadVectorResource(imageResId).resource.resource?.let {
+    // DrawVector(
+    //     vectorImage = it,
+    //     tintColor = tint ?: Color.Black
+    // )
+  }
 }

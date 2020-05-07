@@ -8,15 +8,15 @@ import android.content.SharedPreferences
  */
 
 class KeyValueStorage(
-    private val sharedPreferences: SharedPreferences
+  private val sharedPreferences: SharedPreferences
 ) {
-    fun getString(key: String) = sharedPreferences.getString(key, null)
+  fun getString(key: String) = sharedPreferences.getString(key, null)
 
-    fun putString(key: String, value: String?) = sharedPreferences.edit()
-        .putString(key, value)
-        .commit()
+  fun putString(key: String, value: String?) = sharedPreferences.edit()
+    .putString(key, value)
+    .commit()
 
-    fun clear(key: String) {
-        sharedPreferences.edit().remove(key).commit()
-    }
+  fun clear(key: String) {
+    sharedPreferences.edit().remove(key).commit()
+  }
 }

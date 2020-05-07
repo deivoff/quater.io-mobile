@@ -12,17 +12,17 @@ import timber.log.Timber
 @Suppress("unused")
 class QuarterApplication : Application() {
 
-    override fun onCreate() {
-        super.onCreate()
-        setupTimber()
-        setupDi()
-    }
+  override fun onCreate() {
+    super.onCreate()
+    setupTimber()
+    setupDi()
+  }
 
-    private fun setupDi() {
-        DataModule.init(this)
-    }
+  private fun setupDi() {
+    DataModule.init(this)
+  }
 
-    private fun setupTimber() {
-        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
-    }
+  private fun setupTimber() {
+    if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
+  }
 }

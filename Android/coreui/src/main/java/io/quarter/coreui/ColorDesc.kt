@@ -11,13 +11,13 @@ import io.quarter.coreui.extensions.getColorCompat
  */
 
 abstract class ColorDesc {
-    data class Resource(@ColorRes val res: Int) : ColorDesc() {
-        override fun create(context: Context): Int = context.getColorCompat(res)
-    }
+  data class Resource(@ColorRes val res: Int) : ColorDesc() {
+    override fun create(context: Context): Int = context.getColorCompat(res)
+  }
 
-    data class Raw(@ColorInt val color: Int) : ColorDesc() {
-        override fun create(context: Context): Int = color
-    }
+  data class Raw(@ColorInt val color: Int) : ColorDesc() {
+    override fun create(context: Context): Int = color
+  }
 
-    abstract fun create(context: Context): Int
+  abstract fun create(context: Context): Int
 }

@@ -6,11 +6,11 @@ import io.reactivex.Observable
 
 object WindowInsetsHolder {
 
-    private val rect = BehaviorRelay.create<Rect>()
+  private val rect = BehaviorRelay.create<Rect>()
 
-    fun get(): Rect = rect.value ?: Rect()
+  fun get(): Rect = rect.value ?: Rect()
 
-    fun observe(): Observable<Rect> = rect.hide()
+  fun observe(): Observable<Rect> = rect.hide()
 
-    fun newInsets(insets: Rect) = rect.accept(insets)
+  fun newInsets(insets: Rect) = rect.accept(insets)
 }

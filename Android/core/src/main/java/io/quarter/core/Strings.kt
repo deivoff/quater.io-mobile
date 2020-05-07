@@ -6,34 +6,34 @@ package io.quarter.core
  */
 
 object Strings {
-    const val create = "Создать"
-    const val error = "Ошибка"
-    const val tryAgain = "Попробуйте еще раз."
+  const val create = "Создать"
+  const val error = "Ошибка"
+  const val tryAgain = "Попробуйте еще раз."
 
-    object Authorization {
-        const val login = "Войти"
-        const val register = "Зарегестрироваться"
+  object Authorization {
+    const val login = "Войти"
+    const val register = "Зарегестрироваться"
 
-        const val loginTitle = "Авторизация"
-        const val registerTitle = "Регистрация"
+    const val loginTitle = "Авторизация"
+    const val registerTitle = "Регистрация"
 
-        const val noAccount = "Нет аккаунта?"
-        const val password = "Пароль"
-        const val name = "Логин"
-        const val forgotPassword = "Забыли пароль?"
+    const val noAccount = "Нет аккаунта?"
+    const val password = "Пароль"
+    const val name = "Логин"
+    const val forgotPassword = "Забыли пароль?"
 
-        const val loginError = "Ошибка при авторизации"
-    }
+    const val loginError = "Ошибка при авторизации"
+  }
 
-    object Register {
-        const val email = "Электронный адрес"
-        const val lastName = "Фамилия"
-        const val firstName = "Имя"
-        const val patronymic = "Отчество"
+  object Register {
+    const val email = "Электронный адрес"
+    const val lastName = "Фамилия"
+    const val firstName = "Имя"
+    const val patronymic = "Отчество"
 
-        const val alreadyClient = "Вы наш клиент?"
+    const val alreadyClient = "Вы наш клиент?"
 
-        const val registerError = "Ошибка при регистрации"
-        const val emailError = "Некорректный E-mail"
-    }
+    const val registerError = "Ошибка при регистрации"
+    const val emailError = "Некорректный E-mail"
+  }
 }

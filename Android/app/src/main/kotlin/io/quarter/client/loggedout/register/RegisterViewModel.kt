@@ -11,48 +11,48 @@ import io.quarter.data.register.RegisterRepository
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(
-    private val registerRepository: RegisterRepository = DataModule.registerRepo
+  private val registerRepository: RegisterRepository = DataModule.registerRepo
 ) : ViewModel() {
 
-    val registerViewState: MutableLiveData<RegisterViewState> = MutableLiveData()
+  val registerViewState: MutableLiveData<RegisterViewState> = MutableLiveData()
 
-    init {
-        registerViewState.value = RegisterViewState()
+  init {
+    registerViewState.value = RegisterViewState()
+  }
+
+  fun register(value: RegisterInput) {
+    if (!Patterns.EMAIL_ADDRESS.matcher(value.email).matches()) {
+      registerViewState.modify { copy(isEmailInvalid = true) }
+      return
     }
 
-    fun register(value: RegisterInput) {
-        if (!Patterns.EMAIL_ADDRESS.matcher(value.email).matches()) {
-            registerViewState.modify { copy(isEmailInvalid = true) }
-            return
-        }
-
-        if (value.password.isEmpty()) {
-            return
-        }
-
-        registerViewState.modify { copy(isLoading = true, isEmailInvalid = false) }
-
-        viewModelScope.launch {
-            try {
-                val id = registerRepository.register(value)
-                registerViewState.modify { copy(isRegisterSuccess = true, isLoading = false) }
-            } catch (e: Exception) {
-                registerViewState.modify {
-                    copy(
-                        isRegisterSuccess = false,
-                        isLoading = false,
-                        isError = true
-                    )
-                }
-                e.printStackTrace()
-            }
-        }
+    if (value.password.isEmpty()) {
+      return
     }
 
-    data class RegisterViewState(
-        val isEmailInvalid: Boolean? = null,
-        val isRegisterSuccess: Boolean? = null,
-        val isLoading: Boolean = false,
-        val isError: Boolean = false
-    )
+    registerViewState.modify { copy(isLoading = true, isEmailInvalid = false) }
+
+    viewModelScope.launch {
+      try {
+        val id = registerRepository.register(value)
+        registerViewState.modify { copy(isRegisterSuccess = true, isLoading = false) }
+      } catch (e: Exception) {
+        registerViewState.modify {
+          copy(
+            isRegisterSuccess = false,
+            isLoading = false,
+            isError = true
+          )
+        }
+        e.printStackTrace()
+      }
+    }
+  }
+
+  data class RegisterViewState(
+    val isEmailInvalid: Boolean? = null,
+    val isRegisterSuccess: Boolean? = null,
+    val isLoading: Boolean = false,
+    val isError: Boolean = false
+  )
 }
