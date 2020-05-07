@@ -1,22 +1,24 @@
 package io.quarter.coreui.composables
 
 import androidx.compose.Composable
+import androidx.compose.getValue
+import androidx.compose.setValue
 import androidx.ui.core.Modifier
-import androidx.ui.core.PasswordTextField
-import androidx.ui.core.Text
-import androidx.ui.core.TextField
 import androidx.ui.foundation.Border
+import androidx.ui.foundation.Text
+import androidx.ui.foundation.TextField
+import androidx.ui.foundation.TextFieldValue
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.input.ImeAction
 import androidx.ui.input.KeyboardType
 import androidx.ui.layout.Arrangement
 import androidx.ui.layout.Column
-import androidx.ui.layout.LayoutHeight
-import androidx.ui.layout.LayoutPadding
-import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
 import androidx.ui.layout.Stack
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
+import androidx.ui.layout.preferredHeightIn
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.Surface
 import androidx.ui.text.TextStyle
@@ -26,51 +28,52 @@ import androidx.ui.unit.sp
 @Composable
 fun TextInput(
   hint: String,
-  value: String,
+  value: TextFieldValue,
   error: String? = null,
   identifier: String? = null,
   onImeAction: (ImeAction) -> Unit = {},
   keyboardType: KeyboardType = KeyboardType.Text,
   imeAction: ImeAction = ImeAction.Next,
-  onValueChange: (value: String) -> Unit
+  onValueChange: (value: TextFieldValue) -> Unit
 ) {
-  Column(modifier = LayoutPadding(bottom = 24.dp)) {
+  Column(modifier = Modifier.padding(bottom = 24.dp).fillMaxWidth()) {
     Surface(
       shape = RoundedCornerShape(8.dp),
       border = Border(
         size = 1.dp,
-        color = MaterialTheme.colors().primary.takeIf {
+        color = MaterialTheme.colors.primary.takeIf {
           error == null
-        } ?: MaterialTheme.colors().error
+        } ?: MaterialTheme.colors.error
       )
     ) {
       Column(
-        modifier = LayoutHeight.Min(48.dp) + LayoutPadding(12.dp),
-        arrangement = Arrangement.Center
+        modifier = Modifier.preferredHeightIn(minHeight = 48.dp).padding(12.dp),
+        verticalArrangement = Arrangement.Center
       ) {
-        Stack(modifier = LayoutWidth.Fill) {
-          if (value.isEmpty())
+        Stack(modifier = Modifier.fillMaxWidth()) {
+          if (value.text.isEmpty())
             Text(
               text = hint,
-              style = TextStyle(MaterialTheme.colors().secondary.copy(alpha = 0.6f))
+              style = TextStyle(MaterialTheme.colors.secondary.copy(alpha = 0.6f))
             )
           TextField(
+            focusIdentifier = identifier,
+            modifier = Modifier.fillMaxWidth(),
             keyboardType = keyboardType,
             textStyle = TextStyle(color = Color.Black, fontSize = 16.sp),
             value = value,
             onImeActionPerformed = onImeAction,
             imeAction = imeAction,
-            onValueChange = onValueChange,
-            focusIdentifier = identifier
+            onValueChange = onValueChange
           )
         }
       }
     }
     if (error != null) {
-      Row(modifier = LayoutPadding(top = 4.dp, start = 8.dp)) {
+      Row(modifier = Modifier.padding(start = 8.dp, top = 4.dp)) {
         Text(
-          text = error, style = MaterialTheme.typography().caption.copy(
-            color = MaterialTheme.colors().error
+          text = error, style = MaterialTheme.typography.caption.copy(
+            color = MaterialTheme.colors.error
           )
         )
       }
@@ -81,12 +84,12 @@ fun TextInput(
 @Composable
 fun PasswordTextInput(
   hint: String,
-  value: String,
+  value: TextFieldValue,
   identifier: String? = null,
-  layoutModifier: Modifier = LayoutPadding(bottom = 24.dp),
+  layoutModifier: Modifier = Modifier.padding(bottom = 24.dp),
   imeAction: ImeAction = ImeAction.Done,
   onImeAction: (ImeAction) -> Unit = {},
-  onValueChange: (value: String) -> Unit
+  onValueChange: (value: TextFieldValue) -> Unit
 ) {
   Surface(
     modifier = layoutModifier,
@@ -94,16 +97,18 @@ fun PasswordTextInput(
     border = Border(1.dp, Color.Black)
   ) {
     Column(
-      modifier = LayoutHeight.Min(48.dp) + LayoutPadding(12.dp),
-      arrangement = Arrangement.Center
+      modifier = Modifier.preferredHeightIn(minHeight = 48.dp) + Modifier.padding(12.dp),
+      verticalArrangement = Arrangement.Center
     ) {
-      Stack(modifier = LayoutWidth.Fill) {
-        if (value.isEmpty())
+      Stack(modifier = Modifier.fillMaxWidth()) {
+        if (value.text.isEmpty())
           Text(
             text = hint,
-            style = TextStyle(MaterialTheme.colors().secondary.copy(alpha = 0.6f))
+            style = TextStyle(MaterialTheme.colors.secondary.copy(alpha = 0.6f))
           )
-        PasswordTextField(
+        TextField(
+          modifier = Modifier.fillMaxWidth(),
+          keyboardType = KeyboardType.Password,
           focusIdentifier = identifier,
           textStyle = TextStyle(color = Color.Black, fontSize = 16.sp),
           value = value,

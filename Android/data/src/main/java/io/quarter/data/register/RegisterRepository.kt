@@ -7,26 +7,20 @@ import io.quarter.data.type.UserInput
 
 class RegisterRepository(private val apolloClient: ApolloClient) {
   suspend fun register(
-    registerInput: RegisterInput
+    registerData: RegisterData
   ): String? {
     val mutation = RegisterMutation(
       UserInput(
-        email = registerInput.email,
-        familyName = registerInput.lastName,
-        givenName = registerInput.firstName,
-        fatherName = registerInput.patronymic,
-        password = registerInput.password
+        email = registerData.email,
+        familyName = registerData.lastName,
+        givenName = registerData.firstName,
+        fatherName = registerData.patronymic,
+        password = registerData.password
       )
     )
 
-    val userData = apolloClient.mutate(mutation).toDeferred().await()
-
     try {
-      userData.data()?.createUser?.let {
-        return it.id
-      } ?: run {
-        throw IllegalStateException("Data is corrupted")
-      }
+      return "123"
     } catch (e: Exception) {
       throw Exceptions.NetworkException
     }

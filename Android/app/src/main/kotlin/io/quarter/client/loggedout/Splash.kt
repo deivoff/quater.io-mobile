@@ -1,13 +1,15 @@
 package io.quarter.client.loggedout
 
 import androidx.compose.Composable
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
+import androidx.ui.foundation.Text
 import androidx.ui.layout.Arrangement
 import androidx.ui.layout.Column
-import androidx.ui.layout.LayoutHeight
-import androidx.ui.layout.LayoutPadding
-import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Spacer
+import androidx.ui.layout.fillMaxSize
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.height
+import androidx.ui.layout.padding
 import androidx.ui.material.MaterialTheme
 import androidx.ui.text.style.TextAlign
 import androidx.ui.unit.dp
@@ -22,25 +24,21 @@ import io.quarter.coreui.composables.PrimaryButton
 interface Splash {
   companion object {
     @Composable
-    fun Content(
-
-      loginClick: () -> Unit,
-      registerClick: () -> Unit
-    ) {
+    fun Content(loginClick: () -> Unit, registerClick: () -> Unit) {
       Column(
-        modifier = LayoutPadding(16.dp),
-        arrangement = Arrangement.Center
+        modifier = Modifier.padding(16.dp).fillMaxSize(),
+        verticalArrangement = Arrangement.Center
       ) {
         Text(
-          modifier = LayoutWidth.Fill,
+          modifier = Modifier.fillMaxWidth(),
           text = "quarter.io",
-          style = MaterialTheme.typography().h2.copy(
+          style = MaterialTheme.typography.h2.copy(
             textAlign = TextAlign.Center
           )
         )
-        Spacer(modifier = LayoutHeight.Min(92.dp))
+        Spacer(modifier = Modifier.height(height = 92.dp))
         PrimaryButton(text = Strings.Authorization.login, onClick = loginClick)
-        Spacer(modifier = LayoutHeight.Min(16.dp))
+        Spacer(modifier = Modifier.height(height = 16.dp))
         PrimaryButton(text = Strings.Authorization.register, onClick = registerClick)
       }
     }

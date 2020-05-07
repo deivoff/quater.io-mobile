@@ -9,25 +9,32 @@ import com.github.zsoltk.compose.backpress.AmbientBackPressHandler
 import com.github.zsoltk.compose.backpress.BackPressHandler
 import com.github.zsoltk.compose.savedinstancestate.BundleScope
 import com.github.zsoltk.compose.savedinstancestate.saveAmbient
+import io.quarter.client.loggedout.login.LoginViewModel
+import io.quarter.client.loggedout.register.RegisterViewModel
 import io.quarter.client.root.Root
 import io.quarter.client.root.RootViewModel
 
 class RootActivity : AppCompatActivity() {
   private val backPressHandler = BackPressHandler()
 
-  private val rootViewModel = RootViewModel()
+  private val dependencyContext = object : DependencyContext {
+    override val loginViewModel: LoginViewModel get() = LoginViewModel()
+    override val registerViewModel: RegisterViewModel get() = RegisterViewModel()
+    override val rootViewModel: RootViewModel = RootViewModel()
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
       MaterialTheme(colors) {
-        Providers(AmbientBackPressHandler provides backPressHandler) {
+        Providers(
+          AmbientBackPressHandler provides backPressHandler,
+          DependencyContextAmbient provides dependencyContext
+        ) {
+          val dependencyContext = DependencyContextAmbient.current
           BundleScope(savedInstanceState) {
             Root.Content(
-              defaultRouting = if (rootViewModel.isAuthorized)
-                Root.Routing.LoggedIn
-              else
-                Root.Routing.LoggedOut
+              defaultRouting = dependencyContext.rootViewModel.defaultRouting
             )
           }
         }

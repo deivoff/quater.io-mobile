@@ -12,7 +12,7 @@ object Strings {
 
   object Authorization {
     const val login = "Войти"
-    const val register = "Зарегестрироваться"
+    const val register = "Зарегистрироваться"
 
     const val loginTitle = "Авторизация"
     const val registerTitle = "Регистрация"

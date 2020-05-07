@@ -6,8 +6,6 @@ import androidx.ui.core.ContextAmbient
 import com.github.zsoltk.compose.router.Router
 import io.quarter.client.loggedin.LoggedIn
 import io.quarter.client.loggedout.LoggedOut
-import io.quarter.client.loggedout.login.LoginViewModel
-import io.quarter.client.loggedout.register.RegisterViewModel
 import io.quarter.coreui.extensions.hideKeyboard
 
 interface Root {
@@ -28,13 +26,9 @@ interface Root {
           is Routing.LoggedOut -> LoggedOut.Content(
             defaultRouting = LoggedOut.Routing.Splash(
               onAuthorized = { backStack.newRoot(Routing.LoggedIn) }
-            ),
-            registerViewModel = RegisterViewModel(),
-            loginViewModel = LoginViewModel()
+            )
           )
-          is Routing.LoggedIn -> LoggedIn.Content(
-            loginViewModel = LoginViewModel()
-          ) {
+          is Routing.LoggedIn -> LoggedIn.Content {
             backStack.newRoot(Routing.LoggedOut)
           }
         }

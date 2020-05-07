@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.quarter.core.modify
 import io.quarter.data.DataModule
-import io.quarter.data.register.RegisterInput
+import io.quarter.data.register.RegisterData
 import io.quarter.data.register.RegisterRepository
 import kotlinx.coroutines.launch
 
@@ -20,7 +20,7 @@ class RegisterViewModel(
     registerViewState.value = RegisterViewState()
   }
 
-  fun register(value: RegisterInput) {
+  fun register(value: RegisterData) {
     if (!Patterns.EMAIL_ADDRESS.matcher(value.email).matches()) {
       registerViewState.modify { copy(isEmailInvalid = true) }
       return

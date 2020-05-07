@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import io.quarter.core.modify
 import io.quarter.data.DataModule
 import io.quarter.data.KeyValueStorage
-import io.quarter.data.authorization.AuthorizationInput
+import io.quarter.data.authorization.AuthorizationData
 import io.quarter.data.authorization.AuthorizationRepository
 import kotlinx.coroutines.launch
 
@@ -21,12 +21,12 @@ class LoginViewModel(
     loginViewState.value = LoginViewState()
   }
 
-  fun login(authorizationInput: AuthorizationInput) {
+  fun login(authorizationData: AuthorizationData) {
     loginViewState.modify { copy(isLoading = true, isError = false) }
 
     viewModelScope.launch {
       try {
-        val token = authorizationRepository.login(authorizationInput)
+        val token = authorizationRepository.login(authorizationData)
         keyValueStorage.putString("token", token)
         loginViewState.modify {
           copy(

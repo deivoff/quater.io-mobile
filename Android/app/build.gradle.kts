@@ -38,7 +38,7 @@ android {
     compose = true
   }
   composeOptions {
-    kotlinCompilerExtensionVersion = "0.1.0-dev07"
+    kotlinCompilerExtensionVersion = Versions.compose
   }
   sourceSets {
     getByName("main").java.srcDir("src/main/kotlin")
@@ -66,12 +66,13 @@ dependencies {
     Deps.rx.android,
     Deps.arch.viewmodel,
     Deps.router,
-    Deps.compose.framework,
-    Deps.compose.atext,
-    Deps.compose.layout,
-    Deps.compose.material,
-    Deps.compose.tooling,
-    Deps.compose.icons
+    Deps.UI.foundation,
+    Deps.UI.framework,
+    Deps.UI.layout,
+    Deps.UI.material,
+    Deps.UI.animation,
+    Deps.UI.tooling,
+    Deps.UI.livedata
   ).forEach { dependency ->
     implementation(dependency)
   }

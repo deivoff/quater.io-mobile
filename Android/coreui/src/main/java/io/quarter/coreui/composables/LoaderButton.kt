@@ -1,15 +1,16 @@
 package io.quarter.coreui.composables
 
 import androidx.compose.Composable
-import androidx.ui.core.LayoutTag
 import androidx.ui.core.Modifier
+import androidx.ui.core.tag
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Shape
 import androidx.ui.layout.Arrangement
 import androidx.ui.layout.Column
-import androidx.ui.layout.LayoutHeight
-import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
+import androidx.ui.layout.fillMaxSize
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.height
 import androidx.ui.material.CircularProgressIndicator
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.Surface
@@ -24,29 +25,29 @@ import androidx.ui.unit.dp
 fun LoaderButton(
   text: String,
   isLoading: Boolean = false,
-  modifier: Modifier = LayoutTag("loaderButton$text"),
+  modifier: Modifier = Modifier.tag("loaderButton$text"),
   shape: Shape = RoundedCornerShape(8.dp),
   isEnabled: Boolean = true,
   onClick: () -> Unit = {}
 ) {
   Column(
-    modifier = LayoutHeight.Min(48.dp) + LayoutHeight.Max(48.dp)
+    modifier = Modifier.fillMaxWidth()
   ) {
     if (isLoading) {
-      Surface(shape = shape, color = MaterialTheme.colors().primary) {
+      Surface(shape = shape, color = MaterialTheme.colors.primary) {
         Row(
-          modifier = LayoutWidth.Fill + LayoutHeight.Fill,
-          arrangement = Arrangement.Center
+          modifier = Modifier.fillMaxSize(),
+          horizontalArrangement = Arrangement.Center
         ) {
           Column(
-            modifier = LayoutWidth.Min(40.dp) + LayoutHeight.Min(48.dp),
-            arrangement = Arrangement.Center
+            modifier = Modifier.height(48.dp),
+            verticalArrangement = Arrangement.Center
           ) {
             Row(
-              modifier = LayoutWidth.Max(40.dp) + LayoutHeight.Max(40.dp),
-              arrangement = Arrangement.Center
+              modifier = Modifier.height(48.dp),
+              horizontalArrangement = Arrangement.Center
             ) {
-              CircularProgressIndicator(color = MaterialTheme.colors().onPrimary)
+              CircularProgressIndicator(color = MaterialTheme.colors.onPrimary)
             }
           }
         }
@@ -54,7 +55,7 @@ fun LoaderButton(
     } else {
       PrimaryButton(
         text = text.takeIf { !isLoading } ?: "",
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         shape = shape,
         isEnabled = isEnabled,
         onClick = onClick.takeIf { !isLoading }

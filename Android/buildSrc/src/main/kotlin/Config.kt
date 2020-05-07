@@ -18,11 +18,11 @@ object Versions {
     const val appVersionName = "0.0.1"
 
     const val kotlin = "1.3.61"
-    const val androidPlugin = "4.1.0-alpha08"
+    const val androidPlugin = "4.1.0-alpha09"
 
-    const val compose = "0.1.0-dev07"
+    const val compose = "0.1.0-dev09"
 
-    const val composeRouter = "0.7.0"
+    const val composeRouter = "0.9.0"
 
     const val rxRelay = "2.1.1"
     const val rxKotlin = "2.4.0"
@@ -59,15 +59,19 @@ object Deps {
         const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     }
 
-    val compose = Compose
+    val compose = UI
 
-    object Compose {
-        const val atext = "androidx.ui:ui-platform:${vers.compose}"
+    object UI {
+        const val composeRuntime = "androidx.compose:compose-runtime:${vers.compose}"
         const val framework = "androidx.ui:ui-framework:${vers.compose}"
         const val layout = "androidx.ui:ui-layout:${vers.compose}"
         const val material = "androidx.ui:ui-material:${vers.compose}"
+        const val foundation = "androidx.ui:ui-foundation:${vers.compose}"
+        const val animation = "androidx.ui:ui-animation:${vers.compose}"
         const val tooling = "androidx.ui:ui-tooling:${vers.compose}"
         const val icons = "androidx.ui:ui-material-icons-extended:${vers.compose}"
+        const val livedata = "androidx.ui:ui-livedata:${vers.compose}"
+        const val rx = "androidx.ui:ui-rxjava2:${vers.compose}"
     }
 
     const val router = "com.github.zsoltk:compose-router:${vers.composeRouter}"

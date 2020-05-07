@@ -5,7 +5,7 @@ package io.quarter.data.register
  * 9/3/20
  */
 
-data class RegisterInput(
+data class RegisterData(
   val email: String = "",
   val password: String = "",
   val lastName: String = "",

@@ -11,9 +11,9 @@ import androidx.ui.res.loadVectorResource
 @Composable
 fun LoadImage(imageResId: Int, tint: Color? = null) {
   loadImageResource(imageResId).resource.resource?.let {
-    Image(image = it)
+    Image(asset = it)
     Image(
-      image = it,
+      asset = it,
       colorFilter = tint?.let { ColorFilter(color = it, blendMode = BlendMode.color) }
     )
   }

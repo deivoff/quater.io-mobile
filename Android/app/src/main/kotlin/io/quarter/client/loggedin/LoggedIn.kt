@@ -1,16 +1,17 @@
 package io.quarter.client.loggedin
 
 import androidx.compose.Composable
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
+import androidx.ui.foundation.Text
 import androidx.ui.layout.Column
-import androidx.ui.layout.LayoutHeight
-import androidx.ui.layout.LayoutPadding
 import androidx.ui.layout.Spacer
+import androidx.ui.layout.fillMaxHeight
+import androidx.ui.layout.padding
 import androidx.ui.material.MaterialTheme
 import androidx.ui.text.style.TextAlign
 import androidx.ui.unit.dp
 import com.github.zsoltk.compose.router.Router
-import io.quarter.client.loggedout.login.LoginViewModel
+import io.quarter.client.DependencyContextAmbient
 import io.quarter.coreui.composables.PrimaryButton
 
 interface LoggedIn {
@@ -22,20 +23,20 @@ interface LoggedIn {
     @Composable
     fun Content(
       defaultRouting: Routing = Routing.Home,
-      loginViewModel: LoginViewModel,
       onLogout: () -> Unit
     ) {
+      val loginViewModel = DependencyContextAmbient.current.loginViewModel
       Router(defaultRouting = defaultRouting) { backStack ->
         when (backStack.last()) {
           else -> Column(
-            modifier = LayoutHeight.Fill + LayoutPadding(16.dp)
+            modifier = Modifier.fillMaxHeight().padding(16.dp)
           ) {
             Text(
-              text = "Authorized", style = MaterialTheme.typography().h3.copy(
+              text = "Authorized", style = MaterialTheme.typography.h3.copy(
                 textAlign = TextAlign.Center
               )
             )
-            Spacer(modifier = LayoutWeight(1f))
+            Spacer(modifier = Modifier.weight(weight = 1f))
             PrimaryButton(
               text = "Выйти",
               onClick = {
