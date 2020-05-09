@@ -6,6 +6,8 @@ package io.quarter.core
  */
 
 object Strings {
+  const val brand = "quarter.io"
+
   const val create = "Создать"
   const val error = "Ошибка"
   const val tryAgain = "Попробуйте еще раз."

@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Providers
 import androidx.ui.core.setContent
-import androidx.ui.material.MaterialTheme
 import com.github.zsoltk.compose.backpress.AmbientBackPressHandler
 import com.github.zsoltk.compose.backpress.BackPressHandler
 import com.github.zsoltk.compose.savedinstancestate.BundleScope
@@ -13,6 +12,7 @@ import io.quarter.client.loggedout.login.LoginViewModel
 import io.quarter.client.loggedout.register.RegisterViewModel
 import io.quarter.client.root.Root
 import io.quarter.client.root.RootViewModel
+import io.quarter.coreui.composables.IOTMaterialTheme
 
 class RootActivity : AppCompatActivity() {
   private val backPressHandler = BackPressHandler()
@@ -26,7 +26,7 @@ class RootActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
-      MaterialTheme(colors) {
+      IOTMaterialTheme {
         Providers(
           AmbientBackPressHandler provides backPressHandler,
           DependencyContextAmbient provides dependencyContext

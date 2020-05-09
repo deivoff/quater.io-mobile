@@ -31,7 +31,7 @@ interface Splash {
       ) {
         Text(
           modifier = Modifier.fillMaxWidth(),
-          text = "quarter.io",
+          text = Strings.brand,
           style = MaterialTheme.typography.h2.copy(
             textAlign = TextAlign.Center
           )

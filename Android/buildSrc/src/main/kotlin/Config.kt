@@ -17,7 +17,7 @@ object Versions {
     const val appVersionCode = 1000
     const val appVersionName = "0.0.1"
 
-    const val kotlin = "1.3.61"
+    const val kotlin = "1.3.70"
     const val androidPlugin = "4.1.0-alpha09"
 
     const val compose = "0.1.0-dev09"

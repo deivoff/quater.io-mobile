@@ -19,6 +19,7 @@ import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.layout.preferredHeightIn
+import androidx.ui.livedata.observeAsState
 import androidx.ui.material.IconButton
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
@@ -26,7 +27,6 @@ import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.ArrowBack
 import androidx.ui.text.AnnotatedString
 import androidx.ui.text.SpanStyle
-import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontWeight
 import androidx.ui.text.style.TextAlign
 import androidx.ui.text.style.TextDecoration
@@ -37,7 +37,6 @@ import io.quarter.coreui.composables.LoaderButton
 import io.quarter.coreui.composables.PasswordTextInput
 import io.quarter.coreui.composables.TextInput
 import io.quarter.coreui.extensions.hideKeyboard
-import io.quarter.coreui.observe
 
 interface Login {
   companion object {
@@ -48,13 +47,12 @@ interface Login {
       val context = ContextAmbient.current
       val loginInput = state { LoginInput() }
 
-      val loginState = observe(data = viewModel.loginViewState)
-
-      if (loginState?.isSuccessfullyLoggedIn == true) onLoggedIn()
-
       Column(
         modifier = Modifier.fillMaxSize()
       ) {
+        val loginState = viewModel.loginViewState.observeAsState()
+        if (loginState.value?.isSuccessfullyLoggedIn == true) onLoggedIn()
+
         TopAppBar(
           title = { Text(text = Strings.Authorization.loginTitle) },
           backgroundColor = Color.White,
@@ -71,7 +69,7 @@ interface Login {
         ) {
           Text(
             modifier = Modifier.fillMaxWidth(),
-            text = "quarter.io",
+            text = Strings.brand,
             style = MaterialTheme.typography.h2.copy(
               textAlign = TextAlign.Center
             )
@@ -112,13 +110,13 @@ interface Login {
           }
           LoaderButton(
             text = Strings.Authorization.login,
-            isLoading = loginState?.isLoading == true,
+            isLoading = loginState.value?.isLoading == true,
             isEnabled = !loginInput.value.isEmpty,
             onClick = {
               viewModel.login(loginInput.value.asData)
             }
           )
-          if (loginState?.isError == true) {
+          if (loginState.value?.isError == true) {
             Column(modifier = Modifier.padding(4.dp)) {
               Text(
                 text = Strings.Authorization.loginError,
@@ -135,7 +133,9 @@ interface Login {
           ) {
             Text(
               text = "${Strings.Authorization.noAccount} ",
-              style = TextStyle(color = Color.Black.copy(alpha = 0.5f))
+              style = MaterialTheme.typography.body1.copy(
+                color = Color.Black.copy(alpha = 0.5f)
+              )
             )
             Clickable(onClick = onRegisterClick) {
               val createText = AnnotatedString(
@@ -145,7 +145,7 @@ interface Login {
                   textDecoration = TextDecoration.Underline
                 )
               )
-              Text(text = createText)
+              Text(text = createText, style = MaterialTheme.typography.body1)
             }
           }
         }

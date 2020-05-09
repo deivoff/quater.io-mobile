@@ -3,8 +3,10 @@ package io.quarter.coreui.composables
 import androidx.compose.Composable
 import androidx.compose.getValue
 import androidx.compose.setValue
+import androidx.ui.core.Alignment
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.Border
+import androidx.ui.foundation.Icon
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.TextField
 import androidx.ui.foundation.TextFieldValue
@@ -12,8 +14,10 @@ import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.input.ImeAction
 import androidx.ui.input.KeyboardType
+import androidx.ui.input.PasswordVisualTransformation
 import androidx.ui.layout.Arrangement
 import androidx.ui.layout.Column
+import androidx.ui.layout.ColumnScope.gravity
 import androidx.ui.layout.Row
 import androidx.ui.layout.Stack
 import androidx.ui.layout.fillMaxWidth
@@ -21,6 +25,8 @@ import androidx.ui.layout.padding
 import androidx.ui.layout.preferredHeightIn
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.Surface
+import androidx.ui.material.icons.Icons
+import androidx.ui.material.icons.filled.ShowChart
 import androidx.ui.text.TextStyle
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
@@ -114,7 +120,8 @@ fun PasswordTextInput(
           value = value,
           imeAction = imeAction,
           onImeActionPerformed = onImeAction,
-          onValueChange = onValueChange
+          onValueChange = onValueChange,
+          visualTransformation = PasswordVisualTransformation()
         )
       }
     }

@@ -2,7 +2,6 @@ package io.quarter.client.loggedout.register
 
 import android.app.Activity
 import androidx.compose.Composable
-import androidx.compose.Model
 import androidx.compose.state
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.FocusManagerAmbient
@@ -10,7 +9,6 @@ import androidx.ui.core.Modifier
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.Icon
 import androidx.ui.foundation.Text
-import androidx.ui.foundation.TextFieldValue
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.graphics.Color
 import androidx.ui.input.ImeAction
@@ -22,6 +20,7 @@ import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.layout.preferredHeightIn
+import androidx.ui.livedata.observeAsState
 import androidx.ui.material.IconButton
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
@@ -29,7 +28,6 @@ import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.ArrowBack
 import androidx.ui.text.AnnotatedString
 import androidx.ui.text.SpanStyle
-import androidx.ui.text.TextStyle
 import androidx.ui.text.style.TextDecoration
 import androidx.ui.unit.dp
 import io.quarter.client.DependencyContextAmbient
@@ -38,7 +36,6 @@ import io.quarter.coreui.composables.LoaderButton
 import io.quarter.coreui.composables.PasswordTextInput
 import io.quarter.coreui.composables.TextInput
 import io.quarter.coreui.extensions.hideKeyboard
-import io.quarter.coreui.observe
 
 interface Register {
   companion object {
@@ -51,15 +48,14 @@ interface Register {
       val viewModel = DependencyContextAmbient.current.registerViewModel
       val focusManager = FocusManagerAmbient.current
       val context = ContextAmbient.current
-      val registerInput = state { RegisterInput() }
-
-      val registerViewState = observe(viewModel.registerViewState)
-      if (registerViewState?.isRegisterSuccess == true) onLoggedIn()
 
       Column(
         modifier = Modifier.fillMaxSize()
       ) {
+        val registerInput = state { RegisterInput() }
+        val registerViewState = viewModel.registerViewState.observeAsState()
 
+        if (registerViewState.value?.isRegisterSuccess == true) onLoggedIn()
         TopAppBar(
           title = { Text(text = Strings.Authorization.registerTitle) },
           backgroundColor = Color.White,
@@ -77,7 +73,7 @@ interface Register {
               hint = Strings.Register.email,
               value = registerInput.value.email,
               error = Strings.Register.emailError.takeIf {
-                registerViewState?.isEmailInvalid == true
+                registerViewState.value?.isEmailInvalid == true
               },
               onImeAction = { focusManager.requestFocusById("PasswordId") }
             ) {
@@ -120,14 +116,14 @@ interface Register {
             }
             LoaderButton(
               text = Strings.Authorization.register,
-              isLoading = registerViewState?.isLoading == true,
+              isLoading = registerViewState.value?.isLoading == true,
               isEnabled = !registerInput.value.isEmpty(),
               onClick = {
                 hideKeyboard(context as Activity)
                 viewModel.register(registerInput.value.asData)
               }
             )
-            if (registerViewState?.isError == true) {
+            if (registerViewState.value?.isError == true) {
               Column(modifier = Modifier.padding(4.dp)) {
                 Text(
                   text = Strings.Register.registerError,
@@ -144,7 +140,9 @@ interface Register {
             ) {
               Text(
                 text = "${Strings.Register.alreadyClient} ",
-                style = TextStyle(color = Color.Black.copy(alpha = 0.5f))
+                style = MaterialTheme.typography.body1.copy(
+                  color = Color.Black.copy(alpha = 0.5f)
+                )
               )
               Clickable(onClick = onLoginClick) {
                 val loginText = AnnotatedString(
@@ -154,7 +152,7 @@ interface Register {
                     textDecoration = TextDecoration.Underline
                   )
                 )
-                Text(text = loginText)
+                Text(text = loginText, style = MaterialTheme.typography.body1)
               }
             }
           }
