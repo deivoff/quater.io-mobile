@@ -36,7 +36,7 @@ dependencies {
   arrayOf(
     Deps.kotlin,
     Deps.timber,
-    Deps.moshi.core,
+    Deps.Moshi.core,
     Deps.apollo.core,
     Deps.apollo.coroutines,
     Deps.coroutines

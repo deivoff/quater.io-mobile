@@ -1,6 +1,8 @@
 package io.quarter.client.root
 
 import androidx.lifecycle.ViewModel
+import io.quarter.client.loggedin.LoggedInRootKey
+import io.quarter.client.loggedout.SplashKey
 import io.quarter.data.DataModule
 import io.quarter.data.KeyValueStorage
 
@@ -9,5 +11,5 @@ class RootViewModel(
 ) : ViewModel() {
   private val isAuthorized get() = !keyValueStorage.getString("token").isNullOrEmpty()
 
-  val defaultRouting get() = if (isAuthorized) Root.Routing.LoggedIn else Root.Routing.LoggedOut
+  val defaultKey get() = if (isAuthorized) LoggedInRootKey() else SplashKey()
 }

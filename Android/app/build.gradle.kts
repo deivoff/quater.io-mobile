@@ -65,14 +65,14 @@ dependencies {
     Deps.rx.relay,
     Deps.rx.android,
     Deps.arch.viewmodel,
-    Deps.router,
     Deps.UI.foundation,
     Deps.UI.framework,
     Deps.UI.layout,
     Deps.UI.material,
     Deps.UI.animation,
     Deps.UI.tooling,
-    Deps.UI.livedata
+    Deps.UI.livedata,
+    Deps.simpleStack
   ).forEach { dependency ->
     implementation(dependency)
   }

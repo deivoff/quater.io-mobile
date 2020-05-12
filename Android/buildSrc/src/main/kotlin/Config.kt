@@ -22,8 +22,6 @@ object Versions {
 
     const val compose = "0.1.0-dev09"
 
-    const val composeRouter = "0.9.0"
-
     const val rxRelay = "2.1.1"
     const val rxKotlin = "2.4.0"
     const val rxAndroid = "2.1.1"
@@ -74,7 +72,7 @@ object Deps {
         const val rx = "androidx.ui:ui-rxjava2:${vers.compose}"
     }
 
-    const val router = "com.github.zsoltk:compose-router:${vers.composeRouter}"
+    const val simpleStack = "com.github.Zhuinden:simple-stack:2.2.4"
 
     val rx = Rx
 
@@ -91,8 +89,6 @@ object Deps {
         const val jvm = "com.soywiz:klock-jvm:${vers.klock}"
         const val android = "com.soywiz:klock-android:${vers.klock}"
     }
-
-    val moshi = Moshi
 
     object Moshi {
         const val core = "com.squareup.moshi:moshi:${vers.moshi}"
